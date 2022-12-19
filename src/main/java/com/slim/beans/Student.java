@@ -6,4 +6,5 @@ public class Student {
 	public String birthday;
 	public String contact;
 	public String section;	
+	public String id;
 }

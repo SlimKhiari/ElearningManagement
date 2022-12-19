@@ -11,7 +11,7 @@
 	<c:if test="${!empty sessionScope.login}">
 	 <p>Bienvenue dans votre espace ${sessionScope.status} , ${sessionScope.login }.</p>
 	</c:if>
-	<c:if test="${!empty name }"><p><c:out value="${name} ${lastname} ${birthday} ${contact} ${section} enregistré."/></p></c:if>
+	<c:if test="${!empty name }"><p><c:out value="${name} ${lastname} ${birthday} ${contact} ${section} ${id} enregistré."/></p></c:if>
 	
 	<%
 		if(session.getAttribute("login") == null)
@@ -30,6 +30,8 @@
 		<input type="text" name="contact" id="contact"/>
 		<label for="section">Filière </label>
 		<input type="text" name="section" id="section"/>
+		<label for="id">Numéro étudiant </label>
+		<input type="text" name="id" id="id"/>
 		<input type="Submit"/>
 	</form>
 </body>

@@ -7,6 +7,9 @@
 <title>Bienvenu dans votre espace d'administration.</title>
 </head>
 <body>
-<a href="/ElearningManagement/studentCreation">Créer un(e) étudiant(e)</a>
+ <ul>
+ 		<li><a href="/ElearningManagement/studentCreation">Créer un(e) étudiant(e)</a></li>
+		<li> <a href="/ElearningManagement/login">Se déconnecter</a></li>
+</ul>
 </body>
 </html>

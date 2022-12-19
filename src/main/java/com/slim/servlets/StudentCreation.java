@@ -31,6 +31,8 @@ public class StudentCreation extends HttpServlet {
 		request.setAttribute("contact",new_student_to_add.contact);
 		new_student_to_add.section = request.getParameter("section");
 		request.setAttribute("section",new_student_to_add.section);
+		new_student_to_add.id = request.getParameter("id");
+		request.setAttribute("id",new_student_to_add.id);
 		request.getRequestDispatcher("/StudentCreationForm.jsp").forward(request, response);
 	}
 
