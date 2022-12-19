@@ -19,7 +19,6 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>StudentCreation</display-name>
@@ -30,12 +29,20 @@
     <servlet-name>StudentCreation</servlet-name>
     <url-pattern>/studentCreation</url-pattern>
   </servlet-mapping>
-  
   <jsp-config>
     <jsp-property-group>
       <url-pattern>*.jsp</url-pattern>
       <include-prelude>/WEB-INF/taglibs.jsp</include-prelude>
     </jsp-property-group>
   </jsp-config>
-  
+  <servlet>
+    <description></description>
+    <display-name>ProfessorCreation</display-name>
+    <servlet-name>ProfessorCreation</servlet-name>
+    <servlet-class>com.slim.servlets.ProfessorCreation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProfessorCreation</servlet-name>
+    <url-pattern>/professorCreation</url-pattern>
+  </servlet-mapping>
 </web-app>
