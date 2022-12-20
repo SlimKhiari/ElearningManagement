@@ -2,6 +2,7 @@ package com.slim.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -70,5 +71,24 @@ private Connection connexion;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void addStudent(Student student)
+    {
+    	 loadDatabase();
+    	 PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connexion.prepareStatement("INSERT INTO students(name,lastname,birthday,contact,section,IDnumber) VALUES(?,?,?,?,?,?);");
+	    	preparedStatement.setString(1, student.getName());
+	    	preparedStatement.setString(2, student.getLastname());
+	    	preparedStatement.setString(3, student.getBirthday());
+	    	preparedStatement.setString(4, student.getContact());
+	    	preparedStatement.setString(5, student.getSection());
+	    	preparedStatement.setString(6, student.getId());
+	    	
+	    	preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 }

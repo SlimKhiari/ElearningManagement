@@ -9,6 +9,7 @@
 <body>
 <h1>Bienvenu dans votre espace d'administration.</h1>
  <ul>
+ 		<li> <a href="/ElearningManagement/studentsList">Liste des étudiants inscrits</a></li>
  		<li><a href="/ElearningManagement/studentCreation">Inscrire un(e) étudiant(e)</a></li>
  		<li><a href="/ElearningManagement/professorCreation">Inscrire un(e) enseignant(e)</a></li>
 		<li> <a href="/ElearningManagement/login">Quitter</a></li>

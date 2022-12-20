@@ -23,35 +23,32 @@
 	<form method="post" action="studentCreation">
 		<p>
 		<label for="name">Nom </label>
-		<input type="text" name="name" id="name"/>
+		<input type="text" name="name" id="name" required="required"/>
 		</p>
 		<p>
 		<label for="lastnamename">Prénom </label>
-		<input type="text" name="lastname" id="lastnamename"/>
+		<input type="text" name="lastname" id="lastnamename" required="required"/>
 		</p>
 		<p>
 		<label for="birthday">Date de naissance </label>
-		<input type="date" name="birthday" id="birthday"/>
+		<input type="date" name="birthday" id="birthday" required="required"/>
 		</p>
 		<p>
 		<label for="contact">Numéro de téléphone </label>
-		<input type="text" name="contact" id="contact"/>
+		<input type="text" name="contact" id="contact" required="required"/>
 		</p>
 		<p>
 		<label for="section">Filière </label>
-		<input type="text" name="section" id="section"/>
+		<input type="text" name="section" id="section" required="required"/>
 		</p>
 		<p>
 		<label for="id">Numéro étudiant </label>
-		<input type="text" name="id" id="id"/>
+		<input type="text" name="id" id="id" required="required"/>
 		</p>
 		<p>
 		<input type="Submit"/>
 		</p>
 	</form>
 	
-	<c:forEach var="student" items="${students}">
-		<li><c:out value="${student.name}"/> <c:out value="${student.id}"/></li>
-	</c:forEach>
 </body>
 </html>

@@ -45,4 +45,14 @@
     <servlet-name>ProfessorCreation</servlet-name>
     <url-pattern>/professorCreation</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>StudentsList</display-name>
+    <servlet-name>StudentsList</servlet-name>
+    <servlet-class>com.slim.servlets.StudentsList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentsList</servlet-name>
+    <url-pattern>/studentsList</url-pattern>
+  </servlet-mapping>
 </web-app>

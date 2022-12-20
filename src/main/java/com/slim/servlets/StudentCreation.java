@@ -23,6 +23,8 @@ public class StudentCreation extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Students studentsTable = new Students();
+		
 		Student new_student_to_add = new Student();
 		new_student_to_add.name = request.getParameter("name");
 		request.setAttribute("name", new_student_to_add.name);
@@ -36,6 +38,10 @@ public class StudentCreation extends HttpServlet {
 		request.setAttribute("section",new_student_to_add.section);
 		new_student_to_add.id = request.getParameter("id");
 		request.setAttribute("id",new_student_to_add.id);
+		
+		studentsTable.addStudent(new_student_to_add);
+		request.setAttribute("students", studentsTable.getStudents());
+
 		request.getRequestDispatcher("/StudentCreationForm.jsp").forward(request, response);
 	}
 
