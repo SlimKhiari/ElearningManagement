@@ -26,18 +26,18 @@ public class StudentCreation extends HttpServlet {
 		Students studentsTable = new Students();
 		
 		Student new_student_to_add = new Student();
-		new_student_to_add.name = request.getParameter("name");
-		request.setAttribute("name", new_student_to_add.name);
-		new_student_to_add.lastname = request.getParameter("lastname");
-		request.setAttribute("lastname", new_student_to_add.lastname);
-		new_student_to_add.birthday = request.getParameter("birthday");
-		request.setAttribute("birthday", new_student_to_add.birthday);
-		new_student_to_add.contact = request.getParameter("contact");
-		request.setAttribute("contact",new_student_to_add.contact);
-		new_student_to_add.section = request.getParameter("section");
-		request.setAttribute("section",new_student_to_add.section);
-		new_student_to_add.id = request.getParameter("id");
-		request.setAttribute("id",new_student_to_add.id);
+		new_student_to_add.setName(request.getParameter("name")); 
+		request.setAttribute("name", new_student_to_add.getName());
+		new_student_to_add.setLastname(request.getParameter("lastname"));
+		request.setAttribute("lastname", new_student_to_add.getLastname());
+		new_student_to_add.setBirthday(request.getParameter("birthday"));
+		request.setAttribute("birthday", new_student_to_add.getBirthday());
+		new_student_to_add.setContact(request.getParameter("contact"));
+		request.setAttribute("contact",new_student_to_add.getContact());
+		new_student_to_add.setSection(request.getParameter("section"));
+		request.setAttribute("section",new_student_to_add.getSection());
+		new_student_to_add.setId(request.getParameter("id"));
+		request.setAttribute("id",new_student_to_add.getId());
 		
 		studentsTable.addStudent(new_student_to_add);
 		request.setAttribute("students", studentsTable.getStudents());

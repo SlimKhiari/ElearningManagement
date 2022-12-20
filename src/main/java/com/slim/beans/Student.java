@@ -1,12 +1,13 @@
 package com.slim.beans;
 
 public class Student {
-	public String name;
-	public String lastname;
-	public String birthday;
-	public String contact;
-	public String section;	
-	public String id;
+	private String name;
+	private String lastname;
+	private String birthday;
+	private String contact;
+	private String section;	
+	private String id;
+	
 	public String getName() {
 		return name;
 	}
