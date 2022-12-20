@@ -7,23 +7,27 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import com.slim.beans.Student;
-import com.slim.db.Students;
+import com.slim.dao.DaoFactory;
+import com.slim.dao.DaoUser;
 
 public class StudentCreation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private DaoUser DaoUser;
+    
+    public void init() throws ServletException {
+        DaoFactory daoFactory = DaoFactory.getInstance();
+        this.DaoUser = daoFactory.getDaoUser();
+    }
 
 	public StudentCreation() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Students studentsTable = new Students();
-		request.setAttribute("students", studentsTable.getStudents());
 		request.getRequestDispatcher("/StudentCreationForm.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Students studentsTable = new Students();
 		
 		Student new_student_to_add = new Student();
 		new_student_to_add.setName(request.getParameter("name")); 
@@ -39,9 +43,8 @@ public class StudentCreation extends HttpServlet {
 		new_student_to_add.setId(request.getParameter("id"));
 		request.setAttribute("id",new_student_to_add.getId());
 		
-		studentsTable.addStudent(new_student_to_add);
-		request.setAttribute("students", studentsTable.getStudents());
-
+		DaoUser.addStudent(new_student_to_add);
+		
 		request.getRequestDispatcher("/StudentCreationForm.jsp").forward(request, response);
 	}
 
