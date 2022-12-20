@@ -23,7 +23,7 @@ public class StudentsList extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("students", DaoUser.getStudents());
-		request.getRequestDispatcher("/StudentsList.jsp").forward(request, response);
+		request.getRequestDispatcher("/studentsList.jsp").forward(request, response);
 	}
 
 }

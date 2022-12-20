@@ -16,7 +16,7 @@ public class ProfessorCreation extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/ProfessorCreationForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/professorCreationForm.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,7 +33,7 @@ public class ProfessorCreation extends HttpServlet {
 		request.setAttribute("section",new_professor_to_add.section);
 		new_professor_to_add.id = request.getParameter("id");
 		request.setAttribute("id",new_professor_to_add.id);
-		request.getRequestDispatcher("/ProfessorCreationForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/professorCreationForm.jsp").forward(request, response);
 	}
 
 }

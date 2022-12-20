@@ -24,7 +24,7 @@ public class StudentCreation extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/StudentCreationForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/studentCreationForm.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,7 +45,7 @@ public class StudentCreation extends HttpServlet {
 		
 		DaoUser.addStudent(new_student_to_add);
 		
-		request.getRequestDispatcher("/StudentCreationForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/studentCreationForm.jsp").forward(request, response);
 	}
 
 }

@@ -30,7 +30,7 @@ public class Login extends HttpServlet {
 		session.setAttribute("status", status);
 		
 		//maintenant il faut une redirection du controller vers la vue(la JSP) en ayant acquis les infos:
-		request.getRequestDispatcher("/Login.jsp").forward(request, response);
+		request.getRequestDispatcher("/login.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +50,7 @@ public class Login extends HttpServlet {
 		}
 		else
 		{	
-			request.getRequestDispatcher("/Login.jsp").forward(request, response);
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
 	}
 
