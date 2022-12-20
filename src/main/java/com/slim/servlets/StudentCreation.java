@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import com.slim.beans.Student;
+import com.slim.db.Students;
 
 public class StudentCreation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -16,6 +17,8 @@ public class StudentCreation extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Students studentsTable = new Students();
+		request.setAttribute("students", studentsTable.getStudents());
 		request.getRequestDispatcher("/StudentCreationForm.jsp").forward(request, response);
 	}
 

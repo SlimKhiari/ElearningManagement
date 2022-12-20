@@ -9,9 +9,9 @@
 <body>
 
 	<c:if test="${!empty sessionScope.login}">
-	 <p>Bienvenue dans votre espace ${sessionScope.status} , ${sessionScope.login }.</p>
+	 <p>${sessionScope.login }, vous avez rajouté: </p>
 	</c:if>
-	<c:if test="${!empty name }"><p><c:out value="${name} ${lastname} ${birthday} ${contact} ${section} ${id} enregistré."/></p></c:if>
+	<c:if test="${!empty name }"><p><c:out value="${name} ${lastname} ${birthday} ${contact} ${section} ${id}"/></p></c:if>
 	
 	<%
 		if(session.getAttribute("login") == null)

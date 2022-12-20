@@ -9,9 +9,9 @@
 <body>
 
 	<c:if test="${!empty sessionScope.login}">
-	 <p>Bienvenue dans votre espace ${sessionScope.status} , ${sessionScope.login }.</p>
+	 <p>${sessionScope.login }, veuillez remplir ce formulaire afin de rajouter un(e) étudiant(e): </p>
 	</c:if>
-	<c:if test="${!empty name }"><p><c:out value="${name} ${lastname} ${birthday} ${contact} ${section} ${id} enregistré."/></p></c:if>
+	<c:if test="${!empty name }"><p><c:out value="${name} ${lastname} ${birthday} ${contact} ${section} ${id}"/></p></c:if>
 	
 	<%
 		if(session.getAttribute("login") == null)
@@ -19,20 +19,39 @@
 			response.sendRedirect("Login.jsp");
 		}
 	%>
+	
 	<form method="post" action="studentCreation">
+		<p>
 		<label for="name">Nom </label>
 		<input type="text" name="name" id="name"/>
+		</p>
+		<p>
 		<label for="lastnamename">Prénom </label>
 		<input type="text" name="lastname" id="lastnamename"/>
+		</p>
+		<p>
 		<label for="birthday">Date de naissance </label>
 		<input type="date" name="birthday" id="birthday"/>
+		</p>
+		<p>
 		<label for="contact">Numéro de téléphone </label>
 		<input type="text" name="contact" id="contact"/>
+		</p>
+		<p>
 		<label for="section">Filière </label>
 		<input type="text" name="section" id="section"/>
+		</p>
+		<p>
 		<label for="id">Numéro étudiant </label>
 		<input type="text" name="id" id="id"/>
+		</p>
+		<p>
 		<input type="Submit"/>
+		</p>
 	</form>
+	
+	<c:forEach var="student" items="${students}">
+		<li><c:out value="${student.name}"/> <c:out value="${student.id}"/></li>
+	</c:forEach>
 </body>
 </html>
