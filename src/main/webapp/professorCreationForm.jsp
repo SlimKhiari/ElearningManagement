@@ -7,19 +7,20 @@
 <title>Ajouter un(e) enseignant(e)</title>
 </head>
 <body>
-
-	<c:if test="${!empty sessionScope.login}">
-	 <p>${sessionScope.login }, vous avez rajouté: </p>
-	</c:if>
-	<c:if test="${!empty name }"><p><c:out value="${name} ${lastname} ${birthday} ${contact} ${section} ${id}"/></p></c:if>
 	
+	<a href="/ElearningManagement//adminMenuRedirection">Revenir au menu</a>
+	
+	<c:if test="${!empty sessionScope.login}">
+	 <p>${sessionScope.login }, veuillez remplir ce formulaire afin de rajouter un(e) enseignant(e): </p>
+	</c:if>
+		
 	<%
 		if(session.getAttribute("login") == null)
 		{
 			response.sendRedirect("Login.jsp");
 		}
 	%>
-	<form method="post" action="studentCreation">
+	<form method="post" action="professorCreation">
 		<p>
 		<label for="name">Nom </label>
 		<input type="text" name="name" id="name" required="required"/>
@@ -46,5 +47,8 @@
 		</p>
 		<input type="Submit"/>
 	</form>
+	
+	<c:if test="${!empty name }"><p><c:out value="[${id} | ${name} ${lastname} , ${birthday} , ${contact} , ${section}] ajouté(e)."/></p></c:if>
+	
 </body>
 </html>

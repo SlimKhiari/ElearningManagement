@@ -51,5 +51,8 @@
 		</p>
 	</form>
 	
+	<c:if test="${!empty name }"><p><c:out value="[${id} | ${name} ${lastname} , ${birthday} , ${contact} , ${section}] ajouté(e)."/></p></c:if>
+	
+	
 </body>
 </html>

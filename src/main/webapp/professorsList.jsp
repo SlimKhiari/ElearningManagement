@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Students registered</title>
+<title>Professors registered</title>
 </head>
 <body>
 	<%
@@ -16,8 +16,8 @@
 	
 	<a href="/ElearningManagement/adminMenuRedirection">Revenir au menu</a>
 
-	<c:forEach var="student" items="${students}">
-		<li><c:out value="${student.id}"/> | <c:out value="${student.name}"/> , <c:out value="${student.lastname}"/> , <c:out value="${student.section}"/> , <c:out value="${student.birthday}"/> , <c:out value="${student.contact}"/></li>
+	<c:forEach var="professor" items="${professors}">
+		<li><c:out value="${professor.id}"/> | <c:out value="${professor.name}"/> , <c:out value="${professor.lastname}"/> , <c:out value="${professor.section}"/> , <c:out value="${professor.birthday}"/> , <c:out value="${professor.contact}"/></li>
 	</c:forEach>
 </body>
 </html>

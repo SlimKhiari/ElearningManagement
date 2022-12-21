@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Students registered</title>
+<title>Supprimer un(e) enseignant(e)</title>
 </head>
 <body>
 	<%
@@ -15,9 +15,15 @@
 	%>
 	
 	<a href="/ElearningManagement/adminMenuRedirection">Revenir au menu</a>
-
-	<c:forEach var="student" items="${students}">
-		<li><c:out value="${student.id}"/> | <c:out value="${student.name}"/> , <c:out value="${student.lastname}"/> , <c:out value="${student.section}"/> , <c:out value="${student.birthday}"/> , <c:out value="${student.contact}"/></li>
-	</c:forEach>
+	
+	<form method="post" action="professorDelete">
+		<p>
+		<label for="professorID">Numéro de l'enseignant(e) à supprimer </label>
+		<input type="text" name="professorID" id="professorID" required="required"/>
+		</p>
+		<p>
+		<input type="Submit"/>
+		</p>
+	</form>
 </body>
 </html>

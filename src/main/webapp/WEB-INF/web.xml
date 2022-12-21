@@ -75,4 +75,34 @@
     <servlet-name>StudentDelete</servlet-name>
     <url-pattern>/studentDelete</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProfessorDelete</display-name>
+    <servlet-name>ProfessorDelete</servlet-name>
+    <servlet-class>com.slim.servlets.ProfessorDelete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProfessorDelete</servlet-name>
+    <url-pattern>/professorDelete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProfessorList</display-name>
+    <servlet-name>ProfessorList</servlet-name>
+    <servlet-class>com.slim.servlets.ProfessorList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProfessorList</servlet-name>
+    <url-pattern>/ProfessorList</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProfessorsList</display-name>
+    <servlet-name>ProfessorsList</servlet-name>
+    <servlet-class>com.slim.servlets.ProfessorsList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProfessorsList</servlet-name>
+    <url-pattern>/professorsList</url-pattern>
+  </servlet-mapping>
 </web-app>
