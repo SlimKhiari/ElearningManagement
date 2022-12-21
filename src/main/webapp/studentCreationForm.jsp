@@ -8,17 +8,16 @@
 </head>
 <body>
 
-	<a href="/ElearningManagement/login">Revenir au menu</a>
+	<a href="/ElearningManagement//adminMenuRedirection">Revenir au menu</a>
 	
 	<c:if test="${!empty sessionScope.login}">
 	 <p>${sessionScope.login }, veuillez remplir ce formulaire afin de rajouter un(e) étudiant(e): </p>
 	</c:if>
-	<c:if test="${!empty name }"><p><c:out value="${name} ${lastname} ${birthday} ${contact} ${section} ${id}"/></p></c:if>
 	
 	<%
 		if(session.getAttribute("login") == null)
 		{
-			response.sendRedirect("Login.jsp");
+			response.sendRedirect("login.jsp");
 		}
 	%>
 	

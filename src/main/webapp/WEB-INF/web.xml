@@ -55,4 +55,24 @@
     <servlet-name>StudentsList</servlet-name>
     <url-pattern>/studentsList</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminMenuRedirection</display-name>
+    <servlet-name>AdminMenuRedirection</servlet-name>
+    <servlet-class>com.slim.servlets.AdminMenuRedirection</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminMenuRedirection</servlet-name>
+    <url-pattern>/adminMenuRedirection</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>StudentDelete</display-name>
+    <servlet-name>StudentDelete</servlet-name>
+    <servlet-class>com.slim.servlets.StudentDelete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentDelete</servlet-name>
+    <url-pattern>/studentDelete</url-pattern>
+  </servlet-mapping>
 </web-app>

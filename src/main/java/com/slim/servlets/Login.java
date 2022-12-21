@@ -46,7 +46,7 @@ public class Login extends HttpServlet {
 			session.setAttribute( "login", login);
 			session.setAttribute("password", password);
 			session.setAttribute("status", status);
-			request.getRequestDispatcher("/menuAdmin.jsp").forward(request, response); //on fait une redirection vers page "Connected"
+			request.getRequestDispatcher("/menuAdmin.jsp").forward(request, response);
 		}
 		else
 		{	

@@ -17,6 +17,23 @@ public class DaoUserImpl implements DaoUser{
 	        this.daoFactory = daoFactory;
 	    }
 
+		@Override
+		public void deleteStudent(String studentID)
+		{
+	        Connection connexion = null;
+			PreparedStatement preparedStatement;
+	        String query = "DELETE FROM students WHERE IDnumber=?";
+	    	
+			try {
+				connexion = daoFactory.getConnection();
+				preparedStatement = connexion.prepareStatement(query);
+				preparedStatement.setNString(1, studentID);
+				preparedStatement.execute();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 	    @Override
 	    public void addStudent(Student student)
 	    {
