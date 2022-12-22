@@ -105,4 +105,34 @@
     <servlet-name>ProfessorsList</servlet-name>
     <url-pattern>/professorsList</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AttendanceTracker</display-name>
+    <servlet-name>AttendanceTracker</servlet-name>
+    <servlet-class>com.slim.servlets.AttendanceTracker</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AttendanceTracker</servlet-name>
+    <url-pattern>/attendanceTracker</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AttendanceTrackerChecker</display-name>
+    <servlet-name>AttendanceTrackerChecker</servlet-name>
+    <servlet-class>com.slim.servlets.AttendanceTrackerChecker</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AttendanceTrackerChecker</servlet-name>
+    <url-pattern>/attendanceTrackerChecker</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>attendanceTrackerFormChecker</display-name>
+    <servlet-name>attendanceTrackerFormChecker</servlet-name>
+    <servlet-class>com.slim.servlets.attendanceTrackerFormChecker</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>attendanceTrackerFormChecker</servlet-name>
+    <url-pattern>/attendanceTrackerFormChecker</url-pattern>
+  </servlet-mapping>
 </web-app>

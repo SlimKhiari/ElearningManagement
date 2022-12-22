@@ -11,5 +11,7 @@ public interface DaoUser {
 	void deleteStudent(String studentID);
 	void deleteProfessor(String professorID);
 	List<Student> getStudents();
+	List<Student> getStudentsByPromoID(String promoID);
 	List<Professor> getProfessors();
+	void attendanceTracker(String studentID, String date, String subject, String time);
 }

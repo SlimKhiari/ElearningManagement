@@ -143,6 +143,54 @@ public class DaoUserImpl implements DaoUser{
 	    }
 	    
 	    @Override
+	    public List<Student> getStudentsByPromoID(String promoID)
+	    {
+	    	 	List<Student> students = new ArrayList<Student>();
+	    	 	PreparedStatement preparedStatement = null;
+		        ResultSet resultat = null;
+		    	Connection connexion = null;
+		    	String query = "SELECT id, name, lastname, birthday, contact, section, IDnumber FROM students WHERE section=?;";
+		        try {
+		            connexion = daoFactory.getConnection();
+		            preparedStatement = connexion.prepareStatement(query);
+					preparedStatement.setNString(1, promoID);
+		            resultat = preparedStatement.executeQuery();
+
+		            while (resultat.next()) {
+		                String name = resultat.getString("name");
+		                String lastname = resultat.getString("lastname");
+		                String birthday = resultat.getString("birthday");
+		                String contact = resultat.getString("contact");
+		                String section = resultat.getString("section");
+		                String id = resultat.getString("IDnumber");
+		                               
+		                Student student = new Student();
+		                student.setName(name);
+		                student.setLastname(lastname);
+		                student.setBirthday(birthday);
+		                student.setContact(contact);
+		                student.setSection(section);
+		                student.setId(id);
+
+		                students.add(student);
+		            }
+		        } catch (SQLException e) {
+		        } finally {
+		            try {
+		                if (resultat != null)
+		                    resultat.close();
+		                if (preparedStatement != null)
+		                	preparedStatement.close();
+		                if (connexion != null)
+		                    connexion.close();
+		            } catch (SQLException ignore) {
+		            }
+		        }
+		        
+		        return students;
+	    }
+	    
+	    @Override
 	    public List<Professor> getProfessors()
 	    {
 	    	   List<Professor> professors = new ArrayList<Professor>();
@@ -187,5 +235,24 @@ public class DaoUserImpl implements DaoUser{
 		        }
 		        
 		        return professors;
+	    }
+	    
+	    @Override
+	    public void attendanceTracker(String studentID, String date, String subject, String time)
+	    {
+	    	Connection connexion = null;
+	    	PreparedStatement preparedStatement;
+	    	
+			try {
+	            connexion = daoFactory.getConnection();
+				preparedStatement = connexion.prepareStatement("INSERT INTO attendancetracker (studentID, date, subject, time) VALUES(?,?,?,?);");
+		    	preparedStatement.setString(1, studentID);
+		    	preparedStatement.setString(2, date);
+		    	preparedStatement.setString(3, subject);
+		    	preparedStatement.setString(4, time);		    	
+		    	preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 	    }
 }

@@ -21,7 +21,8 @@
 				<option value="Administration">Administration</option>
 			</select>
 			<br/><br/>
-			<input name='btnConnect' type='submit'>
+			<button type='submit'>Me connecter</button>
+			
 		</form>
 	</body>
 </html>

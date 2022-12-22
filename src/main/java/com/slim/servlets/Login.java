@@ -40,13 +40,20 @@ public class Login extends HttpServlet {
 		
 		//pour mémoriser les infos (dans le modèle) pour les maintenir sur la durée
 		HttpSession session = request.getSession( true ); 
-		
+
 		if(login.equals("isty") && password.equals("isty") && status.equals("Administration"))
 		{
 			session.setAttribute( "login", login);
 			session.setAttribute("password", password);
 			session.setAttribute("status", status);
 			request.getRequestDispatcher("/menuAdmin.jsp").forward(request, response);
+		}
+		else if(login.equals("prof") && password.equals("prof") && status.equals("Professor"))
+		{
+			session.setAttribute( "login", login);
+			session.setAttribute("password", password);
+			session.setAttribute("status", status);
+			request.getRequestDispatcher("/menuProfesseur.jsp").forward(request, response);
 		}
 		else
 		{	
