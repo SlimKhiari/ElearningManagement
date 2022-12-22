@@ -135,4 +135,14 @@
     <servlet-name>attendanceTrackerFormChecker</servlet-name>
     <url-pattern>/attendanceTrackerFormChecker</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProfessorMenuRedirection</display-name>
+    <servlet-name>ProfessorMenuRedirection</servlet-name>
+    <servlet-class>com.slim.servlets.ProfessorMenuRedirection</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProfessorMenuRedirection</servlet-name>
+    <url-pattern>/professorMenuRedirection</url-pattern>
+  </servlet-mapping>
 </web-app>

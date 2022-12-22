@@ -14,6 +14,8 @@
 		}
 	%>
 	
+	<a href="/ElearningManagement/professorMenuRedirection">Revenir au menu</a>
+	
 	<form method="post" action="attendanceTracker">
 		<p>
 			<label for="promoID">La promotion </label>

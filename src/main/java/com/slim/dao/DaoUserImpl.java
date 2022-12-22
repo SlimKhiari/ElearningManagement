@@ -255,4 +255,72 @@ public class DaoUserImpl implements DaoUser{
 				e.printStackTrace();
 			}
 	    }
+        
+	    @Override
+	    public boolean isInDB(String login, String password, int studentOrProfessor)
+	    {	
+	    	boolean enter=false;
+	    	PreparedStatement preparedStatement = null;
+            ResultSet resultat = null;
+        	Connection connexion = null;
+	    	if (studentOrProfessor == 0) // "0" for professor and "1" for student
+	    	{
+		    	String query = "SELECT IDnumber FROM professors WHERE name=?;";
+		        try {
+		        	connexion = daoFactory.getConnection();
+		            preparedStatement = connexion.prepareStatement(query);
+					preparedStatement.setNString(1, login);
+		            resultat = preparedStatement.executeQuery();
+		            while (resultat.next()) {
+		            	String id = resultat.getString("IDnumber");
+		            	if(id.equals(password))
+		            	{
+		            		enter = true;
+		            	}
+		            }
+		                          
+		        } catch (SQLException e) {
+		        } finally {
+		            try {
+		                if (resultat != null)
+		                    resultat.close();
+		                if (preparedStatement != null)
+		                	preparedStatement.close();
+		                if (connexion != null)
+		                    connexion.close();
+		            } catch (SQLException ignore) {
+		            }
+		        }	
+	    	}
+	    	else
+	    	{
+	    		String query = "SELECT IDnumber FROM students WHERE name=?;";
+		        try {
+		        	connexion = daoFactory.getConnection();
+		            preparedStatement = connexion.prepareStatement(query);
+					preparedStatement.setNString(1, login);
+		            resultat = preparedStatement.executeQuery();
+		            while (resultat.next()) {
+		            	String id = resultat.getString("IDnumber");
+		            	if(id.equals(password))
+		            	{
+		            		enter = true;
+		            	}
+		            }
+		                          
+		        } catch (SQLException e) {
+		        } finally {
+		            try {
+		                if (resultat != null)
+		                    resultat.close();
+		                if (preparedStatement != null)
+		                	preparedStatement.close();
+		                if (connexion != null)
+		                    connexion.close();
+		            } catch (SQLException ignore) {
+		            }
+		        }	
+	    	}
+    		return enter;
+	    }
 }

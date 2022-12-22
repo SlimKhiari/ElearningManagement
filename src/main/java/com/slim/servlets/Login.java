@@ -8,11 +8,20 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import com.slim.dao.DaoFactory;
+import com.slim.dao.DaoUser;
+
 /**
  * Servlet implementation class Login
  */
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private DaoUser DaoUser;
+    
+    public void init() throws ServletException {
+        DaoFactory daoFactory = DaoFactory.getInstance();
+        this.DaoUser = daoFactory.getDaoUser();
+    }
      
     public Login() {
         super();
@@ -40,7 +49,7 @@ public class Login extends HttpServlet {
 		
 		//pour mémoriser les infos (dans le modèle) pour les maintenir sur la durée
 		HttpSession session = request.getSession( true ); 
-
+				
 		if(login.equals("isty") && password.equals("isty") && status.equals("Administration"))
 		{
 			session.setAttribute( "login", login);
@@ -48,12 +57,19 @@ public class Login extends HttpServlet {
 			session.setAttribute("status", status);
 			request.getRequestDispatcher("/menuAdmin.jsp").forward(request, response);
 		}
-		else if(login.equals("prof") && password.equals("prof") && status.equals("Professor"))
+		else if((DaoUser.isInDB(login, password, 0) == true) && status.equals("Professor"))
 		{
 			session.setAttribute( "login", login);
 			session.setAttribute("password", password);
 			session.setAttribute("status", status);
-			request.getRequestDispatcher("/menuProfesseur.jsp").forward(request, response);
+			request.getRequestDispatcher("/menuProfessor.jsp").forward(request, response);
+		}
+		else if((DaoUser.isInDB(login, password, 1) == true) && status.equals("Student"))
+		{
+			session.setAttribute( "login", login);
+			session.setAttribute("password", password);
+			session.setAttribute("status", status);
+			request.getRequestDispatcher("/menuStudent.jsp").forward(request, response);
 		}
 		else
 		{	
