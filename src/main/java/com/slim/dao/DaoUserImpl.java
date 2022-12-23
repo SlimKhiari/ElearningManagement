@@ -255,6 +255,24 @@ public class DaoUserImpl implements DaoUser{
 				e.printStackTrace();
 			}
 	    }
+	    
+	    @Override
+		public void attendanceTrackerCorrected(String studentID, String date, String subject, String time)
+		{
+	    	Connection connexion = null;
+	    	PreparedStatement preparedStatement;
+	    	
+			try {
+	            connexion = daoFactory.getConnection();
+				preparedStatement = connexion.prepareStatement("DELETE FROM attendancetracker WHERE studentID=? AND time=?;");
+		    	preparedStatement.setString(1, studentID);
+		    	preparedStatement.setString(2, time);		    	
+		    	preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
         
 	    @Override
 	    public boolean isInDB(String login, String password, int studentOrProfessor)

@@ -34,7 +34,8 @@
 				<p>
 					<input type="text" name="lastname" id="lastname" value="${studentByID.lastname}"/>
 					<input type="text" name="name" id="name" value="${studentByID.name}"/>
-					<a href="attendanceTracker?promoID=${promoID}&studentID=${studentByID.id}&subject=${subject}&time=${time}&date=${date}"> marquer abscent </a>
+					<a href="attendanceTracker?delete=0&promoID=${promoID}&studentID=${studentByID.id}&subject=${subject}&time=${time}&date=${date}"> marquer abscent </a>
+					<a href="attendanceTracker?delete=1&promoID=${promoID}&studentID=${studentByID.id}&subject=${subject}&time=${time}&date=${date}"> enlever l'abscence </a>
 				</p>
 		</form>	
 	</c:forEach>

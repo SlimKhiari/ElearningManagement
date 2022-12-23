@@ -23,14 +23,22 @@ public class AttendanceTracker extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String delete =request.getParameter("delete");
 		String promoID=request.getParameter("promoID");
 		String subject=request.getParameter("subject");
 		String time=request.getParameter("time");
 		String date=request.getParameter("date");
 		String studentID=request.getParameter("studentID");
-		if(studentID != null && date != null && subject != null && time != null)
+		if (promoID != null && studentID != null && date != null && subject != null && time != null)
 		{
-			DaoUser.attendanceTracker(studentID, date, subject, time);
+			if(delete.equals("0"))
+			{
+				DaoUser.attendanceTracker(studentID, date, subject, time);
+			}
+			else if (delete.equals("1"))
+			{
+				DaoUser.attendanceTrackerCorrected(studentID, date, subject, time);
+			}
 		}
 		request.setAttribute("studentsByID",DaoUser.getStudentsByPromoID(promoID));
 		request.setAttribute("promoID",promoID);
@@ -52,5 +60,4 @@ public class AttendanceTracker extends HttpServlet {
 		request.setAttribute("date",date);
 		request.getRequestDispatcher("/attendanceTrackerForm.jsp").forward(request, response);
 	}
-
 }

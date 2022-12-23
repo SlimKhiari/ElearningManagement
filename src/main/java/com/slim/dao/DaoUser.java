@@ -14,5 +14,6 @@ public interface DaoUser {
 	List<Student> getStudentsByPromoID(String promoID);
 	List<Professor> getProfessors();
 	void attendanceTracker(String studentID, String date, String subject, String time);
+	void attendanceTrackerCorrected(String studentID, String date, String subject, String time);
 	boolean isInDB(String login, String password, int studentOrProfessor);
 }
