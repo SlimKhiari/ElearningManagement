@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Appel des étudiants</title>
+<title>L'appel des étudiants</title>
 </head>
 <body>
 	<%
@@ -37,7 +37,6 @@
 					<a href="attendanceTracker?delete=0&promoID=${promoID}&studentID=${studentByID.id}&subject=${subject}&time=${time}&date=${date}"> marquer abscent </a>
 					<a href="attendanceTracker?delete=1&promoID=${promoID}&studentID=${studentByID.id}&subject=${subject}&time=${time}&date=${date}"> enlever l'abscence </a>
 				</p>
-		</form>	
 	</c:forEach>
 	
 </body>

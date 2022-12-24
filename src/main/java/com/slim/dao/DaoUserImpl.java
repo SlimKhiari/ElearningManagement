@@ -341,4 +341,75 @@ public class DaoUserImpl implements DaoUser{
 	    	}
     		return enter;
 	    }
+	    
+	    @Override
+	    public void saveMarkInDB(String subject, String studentID, String mark)
+	    {
+	    	Connection connexion = null;
+	    	PreparedStatement preparedStatement;
+	    	
+			try {
+	            connexion = daoFactory.getConnection();
+				preparedStatement = connexion.prepareStatement("INSERT INTO studentsmarks (studentID, mark, subject) VALUES(?,?,?);");
+		    	preparedStatement.setString(3, subject);
+		    	preparedStatement.setString(1, studentID);
+		    	preparedStatement.setString(2, mark);
+		    	preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	    }
+	    
+	    @Override
+	    public void deleteMarkFromDB(String subject,String studentID)
+	    {
+	    	Connection connexion = null;
+	    	PreparedStatement preparedStatement;
+	  
+			try {
+	            connexion = daoFactory.getConnection();
+				preparedStatement = connexion.prepareStatement("DELETE FROM studentsmarks WHERE studentID=? AND subject=?;");
+		    	preparedStatement.setString(1, studentID);
+		    	preparedStatement.setString(2, subject);		    	
+		    	preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	    }
+	    
+	    @Override
+	    public 	List<String> getMarksFromDB(String subject)
+	    {
+	    	List<String> marksList = new ArrayList<String>();
+    	 	PreparedStatement preparedStatement = null;
+	        ResultSet resultat = null;
+	    	Connection connexion = null;
+	    	String query = "SELECT studentID, mark FROM studentsmarks WHERE subject=?;";
+	        try {
+	            connexion = daoFactory.getConnection();
+	            preparedStatement = connexion.prepareStatement(query);
+				preparedStatement.setNString(1, subject);
+	            resultat = preparedStatement.executeQuery();
+
+	            while (resultat.next()) {
+	                String studentID = resultat.getString("studentID");
+	                String mark = resultat.getString("mark");
+	                String toList = studentID+" : " +mark;
+	                marksList.add(toList);
+	            }
+	        } catch (SQLException e) {
+	        } finally {
+	            try {
+	                if (resultat != null)
+	                    resultat.close();
+	                if (preparedStatement != null)
+	                	preparedStatement.close();
+	                if (connexion != null)
+	                    connexion.close();
+	            } catch (SQLException ignore) {
+	            }
+	        }
+	        
+	        return marksList;
+	    }
 }

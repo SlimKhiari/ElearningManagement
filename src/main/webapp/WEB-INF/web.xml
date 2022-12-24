@@ -145,4 +145,34 @@
     <servlet-name>ProfessorMenuRedirection</servlet-name>
     <url-pattern>/professorMenuRedirection</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SetMarks</display-name>
+    <servlet-name>SetMarks</servlet-name>
+    <servlet-class>com.slim.servlets.SetMarks</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SetMarks</servlet-name>
+    <url-pattern>/setMarks</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>vf</display-name>
+    <servlet-name>vf</servlet-name>
+    <servlet-class>com.slim.servlets.vf</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>vf</servlet-name>
+    <url-pattern>/vf</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MessageToStudents</display-name>
+    <servlet-name>MessageToStudents</servlet-name>
+    <servlet-class>com.slim.servlets.MessageToStudents</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessageToStudents</servlet-name>
+    <url-pattern>/messageToStudents</url-pattern>
+  </servlet-mapping>
 </web-app>
