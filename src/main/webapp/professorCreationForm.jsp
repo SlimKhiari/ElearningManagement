@@ -20,6 +20,7 @@
 			response.sendRedirect("Login.jsp");
 		}
 	%>
+	
 	<form method="post" action="professorCreation">
 		<p>
 		<label for="name">Nom </label>
