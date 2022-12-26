@@ -3,11 +3,6 @@
   <display-name>ElearningManagement</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-    <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
   <servlet>
     <description></description>
@@ -157,16 +152,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>vf</display-name>
-    <servlet-name>vf</servlet-name>
-    <servlet-class>com.slim.servlets.vf</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>vf</servlet-name>
-    <url-pattern>/vf</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>MessageToStudents</display-name>
     <servlet-name>MessageToStudents</servlet-name>
     <servlet-class>com.slim.servlets.MessageToStudents</servlet-class>
@@ -174,5 +159,15 @@
   <servlet-mapping>
     <servlet-name>MessageToStudents</servlet-name>
     <url-pattern>/messageToStudents</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UploadServlet</display-name>
+    <servlet-name>UploadServlet</servlet-name>
+    <servlet-class>com.slim.servlets.UploadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadServlet</servlet-name>
+    <url-pattern>/uploadServlet</url-pattern>
   </servlet-mapping>
 </web-app>
