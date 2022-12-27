@@ -69,15 +69,16 @@ public class UploadServlet extends HttpServlet {
 		        dir.mkdirs();
 		    }
 		    Part filePart = request.getPart("file");
-		    String fileName = filePart.getSubmittedFileName();
+		    String fileName = subject+"_"+filePart.getSubmittedFileName();
 		    InputStream is = filePart.getInputStream();
 		    Files.copy(is, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
 		    session = request.getSession( true );
 		    session.setAttribute("fileName", fileName);
 		    session.setAttribute("section", section);
-		    DaoUser.saveFilesName(fileName, section);
 			request.setAttribute("filesName", DaoUser.getFilesName(section));
-			request.getRequestDispatcher("/uploadFiles.jsp").forward(request, response); 
+		    session.setAttribute("subject", subject);
+		    DaoUser.saveFilesName(fileName, section);
+		    request.getRequestDispatcher("/uploadFiles.jsp").forward(request, response); 
 		} catch (IOException | ServletException e)
 		{
 		    out.println("Exception: " + e);

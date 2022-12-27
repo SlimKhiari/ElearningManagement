@@ -23,11 +23,11 @@
 			</p>
 			<p>
 				<label for="subject">Nom du module </label>
-				<input type="text" name="subject" id="subject" required="required"/>
+				<input type="text" name="subject" id="subject" required="required" value="${subject}"/>
 			</p>
 			<p>
 				<label>Sélectionnez le fichier</label>
-            	<input type="file"  name="file">
+            	<input type="file"  name="file" required="required">
 			</p>		
             <button type='submit'>Envoyer</button>
     </form>

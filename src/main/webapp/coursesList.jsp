@@ -15,7 +15,7 @@
 		}
 	%>
 	
-	<a href="/ElearningManagement/professorMenuRedirection">Revenir au menu</a>
+	<a href="/ElearningManagement/studentMenuRedirection">Revenir au menu</a>
 	
 	<c:forEach var="fileName" items="${filesName}">
     	<p><a href="downloadServlet?fileName=${fileName}&section=${section}">${fileName}</a></p>

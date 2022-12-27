@@ -190,4 +190,14 @@
     <servlet-name>CoursesList</servlet-name>
     <url-pattern>/coursesList</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>StudentMenuRedirection</display-name>
+    <servlet-name>StudentMenuRedirection</servlet-name>
+    <servlet-class>com.slim.servlets.StudentMenuRedirection</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentMenuRedirection</servlet-name>
+    <url-pattern>/studentMenuRedirection</url-pattern>
+  </servlet-mapping>
 </web-app>
