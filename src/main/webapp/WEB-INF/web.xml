@@ -170,4 +170,24 @@
     <servlet-name>UploadServlet</servlet-name>
     <url-pattern>/uploadServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DownloadServlet</display-name>
+    <servlet-name>DownloadServlet</servlet-name>
+    <servlet-class>com.slim.servlets.DownloadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadServlet</servlet-name>
+    <url-pattern>/downloadServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CoursesList</display-name>
+    <servlet-name>CoursesList</servlet-name>
+    <servlet-class>com.slim.servlets.CoursesList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CoursesList</servlet-name>
+    <url-pattern>/coursesList</url-pattern>
+  </servlet-mapping>
 </web-app>

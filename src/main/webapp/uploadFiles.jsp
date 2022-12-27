@@ -1,45 +1,43 @@
-<%@page import="java.util.Base64"%>
-<%@ page import="java.sql.*"%>
-
-<%@ page import="java.io.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <html>
-    <head>
-        <title>File Upload</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            .main{
-                width: 300px;
-                height: 200px;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                border: 2px solid;
-            }
-            form{
-                width: 100%;
-                position: relative;
-                display: block;
-                margin: 20px auto;
-            }
-            input{
-                margin: 10px 0;
-            }
-        </style>
-    </head>
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>L'envoie des fichiers</title>
+</head>
+<body>
+  	<%
+		if(session.getAttribute("login") == null)
+		{
+			response.sendRedirect("login.jsp");
+		}
+	%>
+	
+	<a href="/ElearningManagement/professorMenuRedirection">Revenir au menu</a>
     
-    <body>
-       
-        <div class="main">
-            <form method="POST" action="uploadServlet" enctype="multipart/form-data" >
-                <input type="file" name="file"/>
-                <input type="submit" value="Upload"/>
-            </form>
-        </div>
-    </body>
+   
+   	<form action="uploadServlet" method="post" enctype="multipart/form-data">
+			<p>
+				<label for="section">Filière </label>
+				<input type="text" name="section" id="section" required="required"/>
+			</p>
+			<p>
+				<label for="subject">Nom du module </label>
+				<input type="text" name="subject" id="subject" required="required"/>
+			</p>
+			<p>
+				<label>Sélectionnez le fichier</label>
+            	<input type="file"  name="file">
+			</p>		
+            <button type='submit'>Envoyer</button>
+    </form>
+    
+   	
+   <c:forEach var="fileName" items="${filesName}">
+    	<p><a href="downloadServlet?fileName=${fileName}&section=${section}">${fileName}</a></p>
+	</c:forEach>
+	
+   
+          
+</body>
 </html>

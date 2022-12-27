@@ -193,7 +193,7 @@ public class DaoUserImpl implements DaoUser{
 	    @Override
 	    public List<Professor> getProfessors()
 	    {
-	    	   List<Professor> professors = new ArrayList<Professor>();
+	    	    List<Professor> professors = new ArrayList<Professor>();
 		        Statement statement = null;
 		        ResultSet resultat = null;
 		    	Connection connexion = null;
@@ -411,5 +411,87 @@ public class DaoUserImpl implements DaoUser{
 	        }
 	        
 	        return marksList;
+	    }
+	    
+	    @Override
+	    public void saveFilesName(String fileName, String section)
+	    {
+	    	Connection connexion = null;
+	    	PreparedStatement preparedStatement;
+	    	
+			try {
+	            connexion = daoFactory.getConnection();
+				preparedStatement = connexion.prepareStatement("INSERT INTO  uploadedfilesname (fileName, section) VALUES(?,?);");
+		    	preparedStatement.setString(1, fileName);
+		    	preparedStatement.setString(2, section);
+		    	preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	    }
+	    
+	    @Override
+	    public List<String> getFilesName(String section)
+	    {
+	    	List<String> filesNames = new ArrayList<String>();
+    	 	PreparedStatement preparedStatement = null;
+	        ResultSet resultat = null;
+	    	Connection connexion = null;
+	    	String query = "SELECT fileName FROM uploadedfilesname WHERE section=?;";
+	        try {
+	            connexion = daoFactory.getConnection();
+	            preparedStatement = connexion.prepareStatement(query);
+				preparedStatement.setNString(1, section);
+	            resultat = preparedStatement.executeQuery();
+
+	            while (resultat.next()) {
+	                String fileName = resultat.getString("fileName");
+	                filesNames.add(fileName);
+	            }
+	        } catch (SQLException e) {
+	        } finally {
+	            try {
+	                if (resultat != null)
+	                    resultat.close();
+	                if (preparedStatement != null)
+	                	preparedStatement.close();
+	                if (connexion != null)
+	                    connexion.close();
+	            } catch (SQLException ignore) {
+	            }
+	        }
+	        return filesNames;
+	    }
+	    
+	    @Override
+	    public String getSectionByStudentID(String studentID)
+	    {
+	    	String section = null;
+    	 	PreparedStatement preparedStatement = null;
+	        ResultSet resultat = null;
+	    	Connection connexion = null;
+	    	String query = "SELECT section FROM students WHERE IDnumber=?;";
+	        try {
+	            connexion = daoFactory.getConnection();
+	            preparedStatement = connexion.prepareStatement(query);
+				preparedStatement.setNString(1, studentID);
+	            resultat = preparedStatement.executeQuery();
+
+	            while (resultat.next()) {
+	                section = resultat.getString("section");
+	            }
+	        } catch (SQLException e) {
+	        } finally {
+	            try {
+	                if (resultat != null)
+	                    resultat.close();
+	                if (preparedStatement != null)
+	                	preparedStatement.close();
+	                if (connexion != null)
+	                    connexion.close();
+	            } catch (SQLException ignore) {
+	            }
+	        }
+	        return section;
 	    }
 }

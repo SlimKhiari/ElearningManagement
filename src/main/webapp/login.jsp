@@ -16,7 +16,7 @@
 			<label for='txtPassword'>Mot de passe </label>
 			<input name='txtPassword' type='password' value='${password}'>  <br/><br/>
 			<select id="txtStatus" name="txtStatus">
-				<option value="student">Elève</option>
+				<option value="Student">Elève</option>
 				<option value="Professor">Professeur</option>
 				<option value="Administration">Administration</option>
 			</select>
