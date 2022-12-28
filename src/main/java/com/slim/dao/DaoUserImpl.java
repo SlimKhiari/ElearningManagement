@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.slim.beans.Professor;
 import com.slim.beans.Student;
+import com.slim.beans.Exam;
 
 public class DaoUserImpl implements DaoUser{
 	private DaoFactory daoFactory;
@@ -378,9 +379,9 @@ public class DaoUserImpl implements DaoUser{
 	    }
 	    
 	    @Override
-	    public 	List<String> getMarksFromDB(String subject)
+	    public 	List<Exam> getMarksFromDBBySubject(String subject)
 	    {
-	    	List<String> marksList = new ArrayList<String>();
+	    	List<Exam> exams = new ArrayList<Exam>();
     	 	PreparedStatement preparedStatement = null;
 	        ResultSet resultat = null;
 	    	Connection connexion = null;
@@ -392,10 +393,14 @@ public class DaoUserImpl implements DaoUser{
 	            resultat = preparedStatement.executeQuery();
 
 	            while (resultat.next()) {
+	            	
 	                String studentID = resultat.getString("studentID");
 	                String mark = resultat.getString("mark");
-	                String toList = studentID+" : " +mark;
-	                marksList.add(toList);
+	                Exam exam = new Exam();
+	                exam.setStudentID(studentID);
+	                exam.setMark(mark);
+	                exam.setSubject(subject);
+	                exams.add(exam);
 	            }
 	        } catch (SQLException e) {
 	        } finally {
@@ -410,7 +415,46 @@ public class DaoUserImpl implements DaoUser{
 	            }
 	        }
 	        
-	        return marksList;
+	        return exams;
+	    }
+	    
+	    @Override
+	    public 	List<Exam> getMarksFromDBByStudentID(String studentID)
+	    {
+	    	List<Exam> exams = new ArrayList<Exam>();
+    	 	PreparedStatement preparedStatement = null;
+	        ResultSet resultat = null;
+	    	Connection connexion = null;
+	    	String query = "SELECT mark, subject FROM studentsmarks WHERE studentID=?;";
+	        try {
+	            connexion = daoFactory.getConnection();
+	            preparedStatement = connexion.prepareStatement(query);
+				preparedStatement.setNString(1, studentID);
+	            resultat = preparedStatement.executeQuery();
+
+	            while (resultat.next()) {
+	                String subject = resultat.getString("subject");
+	                String mark = resultat.getString("mark");
+	                Exam exam = new Exam();
+	                exam.setStudentID(studentID);
+	                exam.setMark(mark);
+	                exam.setSubject(subject);
+	                exams.add(exam);
+	            }
+	        } catch (SQLException e) {
+	        } finally {
+	            try {
+	                if (resultat != null)
+	                    resultat.close();
+	                if (preparedStatement != null)
+	                	preparedStatement.close();
+	                if (connexion != null)
+	                    connexion.close();
+	            } catch (SQLException ignore) {
+	            }
+	        }
+	        
+	        return exams;
 	    }
 	    
 	    @Override

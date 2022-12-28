@@ -2,7 +2,21 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+<<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(function(){
+    $("input#studentID").on({
+        keydown: function(e) {
+            if (e.which === 32)
+                return false;
+        },
+        change: function() {
+            this.value = this.value.replace(/\s/g, "");
+        }
+    });
+    })
+</script>
 <meta charset="UTF-8">
 <title>Les notes des étudiants</title>
 </head>
@@ -35,7 +49,7 @@
 	</form>
 	
 	<c:forEach var="studentMark" items="${studentsMarks}">
-		<li><c:out value="${studentMark}"/></li>
+		<li><c:out value="${studentMark.subject}"/> : <c:out value="${studentMark.studentID}"/> <c:out value="${studentMark.mark}"/></li>
 	</c:forEach>
 
 </body>

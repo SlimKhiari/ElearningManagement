@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.slim.beans.Professor;
 import com.slim.beans.Student;
+import com.slim.beans.Exam;
 
 public interface DaoUser {
 	void addStudent(Student student);
@@ -21,7 +22,8 @@ public interface DaoUser {
 	
 	void saveMarkInDB(String subject, String studentID, String mark);
 	void deleteMarkFromDB(String subject,String studentID);
-	List<String> getMarksFromDB(String subject);
+	List<Exam> getMarksFromDBBySubject(String subject);
+	public 	List<Exam> getMarksFromDBByStudentID(String studentID);
 
 	void saveFilesName(String fileName, String section);
 	List<String> getFilesName(String section);

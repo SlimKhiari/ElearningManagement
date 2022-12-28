@@ -200,4 +200,14 @@
     <servlet-name>StudentMenuRedirection</servlet-name>
     <url-pattern>/studentMenuRedirection</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetMarks</display-name>
+    <servlet-name>GetMarks</servlet-name>
+    <servlet-class>com.slim.servlets.GetMarks</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetMarks</servlet-name>
+    <url-pattern>/getMarks</url-pattern>
+  </servlet-mapping>
 </web-app>

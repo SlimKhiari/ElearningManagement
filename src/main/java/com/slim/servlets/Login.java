@@ -11,9 +11,6 @@ import java.io.IOException;
 import com.slim.dao.DaoFactory;
 import com.slim.dao.DaoUser;
 
-/**
- * Servlet implementation class Login
- */
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DaoUser DaoUser;
@@ -32,14 +29,13 @@ public class Login extends HttpServlet {
 		String password=request.getParameter("txtPassword");
 		String status=request.getParameter("txtStatus");
 		
-		HttpSession session = request.getSession( true ); // pour obtenir une session HTTP
-		// une session (est comme) une table avec keys/values:
+		HttpSession session = request.getSession( true );  
+		 
 		session.setAttribute("login", login);
 		session.setAttribute("password", password);
 		session.setAttribute("status", status);
 		
-		//maintenant il faut une redirection du controller vers la vue(la JSP) en ayant acquis les infos:
-		request.getRequestDispatcher("/login.jsp").forward(request, response);
+ 		request.getRequestDispatcher("/login.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,8 +43,7 @@ public class Login extends HttpServlet {
 		String password=request.getParameter("txtPassword");
 		String status=request.getParameter("txtStatus");
 		
-		//pour mémoriser les infos (dans le modèle) pour les maintenir sur la durée
-		HttpSession session = request.getSession( true ); 
+ 		HttpSession session = request.getSession( true ); 
 				
 		if(login.equals("isty") && password.equals("isty") && status.equals("Administration"))
 		{

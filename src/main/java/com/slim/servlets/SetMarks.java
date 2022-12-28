@@ -4,9 +4,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import com.slim.beans.Exam;
 import com.slim.dao.DaoFactory;
 import com.slim.dao.DaoUser;
 
@@ -30,27 +32,27 @@ public class SetMarks extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String subject=request.getParameter("subject");
-		request.setAttribute("subject",subject);
-		String studentID=request.getParameter("studentID");
-		request.setAttribute("studentID",studentID);
-		String mark=request.getParameter("mark");
-		request.setAttribute("mark",mark);
+		Exam exam = new Exam();
 		
-		System.out.println(mark);
-		System.out.println(studentID);
+		exam.setSubject(request.getParameter("subject"));
+		request.setAttribute("mark",exam.getSubject());
+		exam.setStudentID(request.getParameter("studentID"));
+		request.setAttribute("mark",exam.getStudentID());
+		exam.setMark(request.getParameter("mark"));
+		request.setAttribute("mark",exam.getMark());
 		
-		if(mark.equals("") && !studentID.equals("")){
-			DaoUser.deleteMarkFromDB(subject,studentID);
+		if(exam.getMark().equals("") && !exam.getStudentID().equals("")){
+			DaoUser.deleteMarkFromDB(exam.getSubject(),exam.getStudentID());
 		}
-		else if (mark.equals("") && studentID.equals(""))
+		else if (exam.getMark().equals("") && exam.getStudentID().equals(""))
 		{
-			System.out.print(DaoUser.getMarksFromDB(subject));
-			request.setAttribute("studentsMarks", DaoUser.getMarksFromDB(subject));
+			request.setAttribute("studentsMarks", DaoUser.getMarksFromDBBySubject(exam.getSubject()));
 		}
 		else
 		{
-			DaoUser.saveMarkInDB(subject,studentID,mark);
+	 		HttpSession session = request.getSession( true ); 
+	 		session.setAttribute("subject", exam.getSubject());
+			DaoUser.saveMarkInDB(exam.getSubject(),exam.getStudentID(),exam.getMark());
 		}
 		request.getRequestDispatcher("/setMarks.jsp").forward(request, response);
 	}
