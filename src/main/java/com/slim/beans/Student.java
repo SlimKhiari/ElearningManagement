@@ -7,6 +7,7 @@ public class Student {
 	private String contact;
 	private String section;	
 	private String id;
+	private String password;
 	
 	public String getName() {
 		return name;
@@ -44,6 +45,14 @@ public class Student {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+		
+	}
+	
 	
 	
 }

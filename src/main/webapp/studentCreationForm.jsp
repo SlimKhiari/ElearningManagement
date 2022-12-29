@@ -47,6 +47,10 @@
 		<input type="text" name="id" id="id" required="required"/>
 		</p>
 		<p>
+		<label for="password">Mot de passe du compte </label>
+		<input type="text" name="password" id="password" required="required"/>
+		</p>
+		<p>
 		<input type="Submit"/>
 		</p>
 	</form>

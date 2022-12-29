@@ -42,6 +42,8 @@ public class ProfessorCreation extends HttpServlet {
 		request.setAttribute("section",new_professor_to_add.getSection());
 		new_professor_to_add.setId(request.getParameter("id"));
 		request.setAttribute("id",new_professor_to_add.getId());
+		new_professor_to_add.setPassword(request.getParameter("password")); 
+		request.setAttribute("password", new_professor_to_add.getPassword());
 		
 		DaoUser.addProfessor(new_professor_to_add);
 

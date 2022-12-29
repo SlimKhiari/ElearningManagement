@@ -62,14 +62,14 @@ public class DaoUserImpl implements DaoUser{
 	    	
 			try {
 	            connexion = daoFactory.getConnection();
-				preparedStatement = connexion.prepareStatement("INSERT INTO students(name,lastname,birthday,contact,section,IDnumber) VALUES(?,?,?,?,?,?);");
+				preparedStatement = connexion.prepareStatement("INSERT INTO students(name,lastname,birthday,contact,section,IDnumber,password) VALUES(?,?,?,?,?,?,?);");
 		    	preparedStatement.setString(1, student.getName());
 		    	preparedStatement.setString(2, student.getLastname());
 		    	preparedStatement.setString(3, student.getBirthday());
 		    	preparedStatement.setString(4, student.getContact());
 		    	preparedStatement.setString(5, student.getSection());
 		    	preparedStatement.setString(6, student.getId());
-		    	
+		    	preparedStatement.setString(7, student.getPassword());
 		    	preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -84,14 +84,14 @@ public class DaoUserImpl implements DaoUser{
 	    	
 			try {
 	            connexion = daoFactory.getConnection();
-				preparedStatement = connexion.prepareStatement("INSERT INTO professors(name,lastname,birthday,contact,section,IDnumber) VALUES(?,?,?,?,?,?);");
+				preparedStatement = connexion.prepareStatement("INSERT INTO professors(name,lastname,birthday,contact,section,IDnumber,password) VALUES(?,?,?,?,?,?,?);");
 		    	preparedStatement.setString(1, professor.getName());
 		    	preparedStatement.setString(2, professor.getLastname());
 		    	preparedStatement.setString(3, professor.getBirthday());
 		    	preparedStatement.setString(4, professor.getContact());
 		    	preparedStatement.setString(5, professor.getSection());
 		    	preparedStatement.setString(6, professor.getId());
-		    	
+		    	preparedStatement.setString(7, professor.getPassword());		    	
 		    	preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();

@@ -42,6 +42,8 @@ public class StudentCreation extends HttpServlet {
 		request.setAttribute("section",new_student_to_add.getSection());
 		new_student_to_add.setId(request.getParameter("id"));
 		request.setAttribute("id",new_student_to_add.getId());
+		new_student_to_add.setPassword(request.getParameter("password"));
+		request.setAttribute("password",new_student_to_add.getPassword());
 		
 		DaoUser.addStudent(new_student_to_add);
 		
