@@ -27,7 +27,7 @@ public class GetAttendanceTracker extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession( true ); 
- 		String studentID = (String) session.getAttribute("password");
+ 		String studentID = (String) session.getAttribute("login");
 		request.setAttribute("studentAttendance", DaoUser.getAttendanceFromDBByStudentID(studentID));
 		request.getRequestDispatcher("/getAttendanceTracker.jsp").forward(request, response);
 	}

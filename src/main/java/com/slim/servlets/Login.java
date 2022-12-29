@@ -42,8 +42,8 @@ public class Login extends HttpServlet {
 		String login=request.getParameter("txtLogin");
 		String password=request.getParameter("txtPassword");
 		String status=request.getParameter("txtStatus");
-		
- 		HttpSession session = request.getSession( true ); 
+
+		HttpSession session = request.getSession( true ); 
 				
 		if(login.equals("isty") && password.equals("isty") && status.equals("Administration"))
 		{

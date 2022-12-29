@@ -21,7 +21,7 @@
 			<label for="promoID">La promotion </label>
 			<input type="text" name="promoID" id="promoID" required="required"/> 
 			<label for="subject">La matière </label>
-			<input type="text" name="subject" id="subject" required="required"/>
+			<input type="text" name="subject" id="subject" required="required" value="${subject}"/>
 			<label for="time">Le créneau </label>
 			<input type="time" name="time" id="time" required="required"/>
 			<label for="date">La date </label>

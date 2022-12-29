@@ -27,10 +27,10 @@ public class AttendanceTracker extends HttpServlet {
 		Course course = new Course();
 		
 		course.setSubject(request.getParameter("subject"));
-		course.setSubject(request.getParameter("date"));
-		course.setSubject(request.getParameter("time"));
-		course.setSubject(request.getParameter("studentID"));
-		
+		course.setDate(request.getParameter("date"));
+		course.setTime(request.getParameter("time"));
+		course.setStudentID(request.getParameter("studentID"));
+			
 		String delete =request.getParameter("delete");
 		String promoID=request.getParameter("promoID");
 		

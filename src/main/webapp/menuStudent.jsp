@@ -12,7 +12,7 @@
 		<li> <a href="/ElearningManagement/attendanceTracker">Voir mon emploi du temps</a></li>
 		<li> <a href="/ElearningManagement/getMarks">Consulter mes notes</a></li>
 		<li> <a href="/ElearningManagement/getAttendanceTracker">Consulter mes abscences</a></li>
-		<li> <a href="/ElearningManagement/coursesList?studentID=${sessionScope.password}">Consulter mes cours</a></li>
+		<li> <a href="/ElearningManagement/coursesList?studentID=${sessionScope.login}">Consulter mes cours</a></li>
 		<li> <a href="/ElearningManagement/login">Quitter mon espace</a></li>
 	</ul>
 </body>

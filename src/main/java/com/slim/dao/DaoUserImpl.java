@@ -285,15 +285,15 @@ public class DaoUserImpl implements DaoUser{
         	Connection connexion = null;
 	    	if (studentOrProfessor == 0) // "0" for professor and "1" for student
 	    	{
-		    	String query = "SELECT IDnumber FROM professors WHERE name=?;";
+		    	String query = "SELECT password FROM professors WHERE IDnumber=?;";
 		        try {
 		        	connexion = daoFactory.getConnection();
 		            preparedStatement = connexion.prepareStatement(query);
 					preparedStatement.setNString(1, login);
 		            resultat = preparedStatement.executeQuery();
 		            while (resultat.next()) {
-		            	String id = resultat.getString("IDnumber");
-		            	if(id.equals(password))
+		            	String getPassword = resultat.getString("password");
+		            	if(getPassword.equals(password))
 		            	{
 		            		enter = true;
 		            	}
@@ -314,15 +314,15 @@ public class DaoUserImpl implements DaoUser{
 	    	}
 	    	else
 	    	{
-	    		String query = "SELECT IDnumber FROM students WHERE name=?;";
+	    		String query = "SELECT password FROM students WHERE IDnumber=?;";
 		        try {
 		        	connexion = daoFactory.getConnection();
 		            preparedStatement = connexion.prepareStatement(query);
 					preparedStatement.setNString(1, login);
 		            resultat = preparedStatement.executeQuery();
 		            while (resultat.next()) {
-		            	String id = resultat.getString("IDnumber");
-		            	if(id.equals(password))
+		            	String getPassword = resultat.getString("password");
+		            	if(getPassword.equals(password))
 		            	{
 		            		enter = true;
 		            	}
