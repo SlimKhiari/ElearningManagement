@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.slim.beans.Professor;
 import com.slim.beans.Student;
+import com.slim.beans.Course;
 import com.slim.beans.Exam;
 
 public class DaoUserImpl implements DaoUser{
@@ -239,7 +240,7 @@ public class DaoUserImpl implements DaoUser{
 	    }
 	    
 	    @Override
-	    public void attendanceTracker(String studentID, String date, String subject, String time)
+	    public void attendanceTracker(Course course)
 	    {
 	    	Connection connexion = null;
 	    	PreparedStatement preparedStatement;
@@ -247,10 +248,10 @@ public class DaoUserImpl implements DaoUser{
 			try {
 	            connexion = daoFactory.getConnection();
 				preparedStatement = connexion.prepareStatement("INSERT INTO attendancetracker (studentID, date, subject, time) VALUES(?,?,?,?);");
-		    	preparedStatement.setString(1, studentID);
-		    	preparedStatement.setString(2, date);
-		    	preparedStatement.setString(3, subject);
-		    	preparedStatement.setString(4, time);		    	
+		    	preparedStatement.setString(1, course.getStudentID());
+		    	preparedStatement.setString(2, course.getDate());
+		    	preparedStatement.setString(3, course.getSubject());
+		    	preparedStatement.setString(4, course.getTime());		    	
 		    	preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -258,7 +259,7 @@ public class DaoUserImpl implements DaoUser{
 	    }
 	    
 	    @Override
-		public void attendanceTrackerCorrected(String studentID, String date, String subject, String time)
+		public void attendanceTrackerCorrected(Course course)
 		{
 	    	Connection connexion = null;
 	    	PreparedStatement preparedStatement;
@@ -266,8 +267,8 @@ public class DaoUserImpl implements DaoUser{
 			try {
 	            connexion = daoFactory.getConnection();
 				preparedStatement = connexion.prepareStatement("DELETE FROM attendancetracker WHERE studentID=? AND time=?;");
-		    	preparedStatement.setString(1, studentID);
-		    	preparedStatement.setString(2, time);		    	
+		    	preparedStatement.setString(1, course.getStudentID());
+		    	preparedStatement.setString(2, course.getTime());		    	
 		    	preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -344,7 +345,7 @@ public class DaoUserImpl implements DaoUser{
 	    }
 	    
 	    @Override
-	    public void saveMarkInDB(String subject, String studentID, String mark)
+	    public void saveMarkInDB(Exam exam)
 	    {
 	    	Connection connexion = null;
 	    	PreparedStatement preparedStatement;
@@ -352,9 +353,9 @@ public class DaoUserImpl implements DaoUser{
 			try {
 	            connexion = daoFactory.getConnection();
 				preparedStatement = connexion.prepareStatement("INSERT INTO studentsmarks (studentID, mark, subject) VALUES(?,?,?);");
-		    	preparedStatement.setString(3, subject);
-		    	preparedStatement.setString(1, studentID);
-		    	preparedStatement.setString(2, mark);
+		    	preparedStatement.setString(3, exam.getSubject());
+		    	preparedStatement.setString(1, exam.getStudentID());
+		    	preparedStatement.setString(2, exam.getMark());
 		    	preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -537,5 +538,47 @@ public class DaoUserImpl implements DaoUser{
 	            }
 	        }
 	        return section;
+	    }
+	    
+	    @Override
+	    public List<Course> getAttendanceFromDBByStudentID(String studentID)
+	    {
+	    	List<Course> courses = new ArrayList<Course>();
+	    	
+    	 	PreparedStatement preparedStatement = null;
+	        ResultSet resultat = null;
+	    	Connection connexion = null;
+	    	String query = "SELECT date, subject, time FROM attendancetracker WHERE studentID=?;";
+	        try {
+	            connexion = daoFactory.getConnection();
+	            preparedStatement = connexion.prepareStatement(query);
+				preparedStatement.setNString(1, studentID);
+	            resultat = preparedStatement.executeQuery();
+
+	            while (resultat.next()) {
+	                String subject = resultat.getString("subject");
+	                String date = resultat.getString("date");
+	                String time = resultat.getString("time");
+	                Course course = new Course();
+	                course.setStudentID(studentID);
+	                course.setDate(date);
+	                course.setTime(time);
+	                course.setSubject(subject);
+	                courses.add(course);
+	            }
+	        } catch (SQLException e) {
+	        } finally {
+	            try {
+	                if (resultat != null)
+	                    resultat.close();
+	                if (preparedStatement != null)
+	                	preparedStatement.close();
+	                if (connexion != null)
+	                    connexion.close();
+	            } catch (SQLException ignore) {
+	            }
+	        }
+	        
+	        return courses;
 	    }
 }

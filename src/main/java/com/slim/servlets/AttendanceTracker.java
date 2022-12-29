@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import com.slim.beans.Course;
 import com.slim.dao.DaoFactory;
 import com.slim.dao.DaoUser;
 
@@ -23,28 +24,32 @@ public class AttendanceTracker extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Course course = new Course();
+		
+		course.setSubject(request.getParameter("subject"));
+		course.setSubject(request.getParameter("date"));
+		course.setSubject(request.getParameter("time"));
+		course.setSubject(request.getParameter("studentID"));
+		
 		String delete =request.getParameter("delete");
 		String promoID=request.getParameter("promoID");
-		String subject=request.getParameter("subject");
-		String time=request.getParameter("time");
-		String date=request.getParameter("date");
-		String studentID=request.getParameter("studentID");
-		if (promoID != null && studentID != null && date != null && subject != null && time != null)
+		
+		if (promoID != null && course.getStudentID() != null && course.getDate() != null && course.getSubject() != null && course.getTime() != null)
 		{
 			if(delete.equals("0"))
 			{
-				DaoUser.attendanceTracker(studentID, date, subject, time);
+				DaoUser.attendanceTracker(course);
 			}
 			else if (delete.equals("1"))
 			{
-				DaoUser.attendanceTrackerCorrected(studentID, date, subject, time);
+				DaoUser.attendanceTrackerCorrected(course);
 			}
 		}
 		request.setAttribute("studentsByID",DaoUser.getStudentsByPromoID(promoID));
 		request.setAttribute("promoID",promoID);
-		request.setAttribute("subject",subject);
-		request.setAttribute("time",time);
-		request.setAttribute("date",date);
+		request.setAttribute("subject",course.getSubject());
+		request.setAttribute("time",course.getTime());
+		request.setAttribute("date",course.getDate());
 		request.getRequestDispatcher("/attendanceTrackerForm.jsp").forward(request, response);
 	}
 

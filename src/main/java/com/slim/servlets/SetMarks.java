@@ -52,7 +52,7 @@ public class SetMarks extends HttpServlet {
 		{
 	 		HttpSession session = request.getSession( true ); 
 	 		session.setAttribute("subject", exam.getSubject());
-			DaoUser.saveMarkInDB(exam.getSubject(),exam.getStudentID(),exam.getMark());
+			DaoUser.saveMarkInDB(exam);
 		}
 		request.getRequestDispatcher("/setMarks.jsp").forward(request, response);
 	}

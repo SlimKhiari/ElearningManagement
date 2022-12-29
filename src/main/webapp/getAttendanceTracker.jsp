@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Mes notes</title>
+<title>Mes abscences</title>
 </head>
 <body>
 	<%
@@ -16,8 +16,8 @@
 	
 	<a href="/ElearningManagement/studentMenuRedirection">Revenir au menu</a>
 	
-	<c:forEach var="studentMark" items="${studentMarks}">
-		<li><c:out value="${studentMark.subject}"/> :  <c:out value="${studentMark.mark}"/></li>
+	<c:forEach var="studentAttendance" items="${studentAttendance}">
+		<li><c:out value="${studentAttendance.date}"/> :  <c:out value="${studentAttendance.subject}"/> - <c:out value="${studentAttendance.time}"/></li>
 	</c:forEach>
 </body>
 </html>

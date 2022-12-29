@@ -210,4 +210,14 @@
     <servlet-name>GetMarks</servlet-name>
     <url-pattern>/getMarks</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetAttendanceTracker</display-name>
+    <servlet-name>GetAttendanceTracker</servlet-name>
+    <servlet-class>com.slim.servlets.GetAttendanceTracker</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAttendanceTracker</servlet-name>
+    <url-pattern>/getAttendanceTracker</url-pattern>
+  </servlet-mapping>
 </web-app>

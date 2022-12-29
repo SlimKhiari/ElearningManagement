@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.slim.beans.Professor;
 import com.slim.beans.Student;
+import com.slim.beans.Course;
 import com.slim.beans.Exam;
 
 public interface DaoUser {
@@ -15,12 +16,13 @@ public interface DaoUser {
 	List<Student> getStudentsByPromoID(String promoID);
 	List<Professor> getProfessors();
 	
-	void attendanceTracker(String studentID, String date, String subject, String time);
-	void attendanceTrackerCorrected(String studentID, String date, String subject, String time);
+	void attendanceTracker(Course course);
+	void attendanceTrackerCorrected(Course course);
+	List<Course> getAttendanceFromDBByStudentID(String studentID);
 	
 	boolean isInDB(String login, String password, int studentOrProfessor);
 	
-	void saveMarkInDB(String subject, String studentID, String mark);
+	void saveMarkInDB(Exam exam);
 	void deleteMarkFromDB(String subject,String studentID);
 	List<Exam> getMarksFromDBBySubject(String subject);
 	public 	List<Exam> getMarksFromDBByStudentID(String studentID);
