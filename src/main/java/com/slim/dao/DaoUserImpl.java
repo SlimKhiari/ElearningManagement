@@ -99,6 +99,27 @@ public class DaoUserImpl implements DaoUser{
 		}
 	    
 	    @Override
+	    public void updateProfessorPassword(String password, String professorID)
+	    {
+    	 	PreparedStatement preparedStatement = null;
+	    	Connection connection = null;
+	    	String query = "UPDATE professors SET password = ? WHERE IDnumber = ?";
+	        try {
+	            connection = daoFactory.getConnection();
+	            preparedStatement = connection.prepareStatement(query);
+				preparedStatement.setNString(1, password);
+				preparedStatement.setNString(2, professorID);
+				preparedStatement.executeUpdate();
+				connection.close();
+	        }
+	        catch (Exception e)
+	        {
+	          System.err.println("Got an exception! ");
+	          System.err.println(e.getMessage());
+	        }
+	    }
+
+	    @Override
 	    public void updateStudentPassword(String password, String studentID)
 	    {
     	 	PreparedStatement preparedStatement = null;
@@ -216,7 +237,7 @@ public class DaoUserImpl implements DaoUser{
 	    }
 	    
 	    @Override
-	    public Student getStudentBystudentID(String studentID)
+	    public Student getStudentById(String studentID)
 	    {
 	    	 	Student student = new Student();
 	    	 	PreparedStatement preparedStatement = null;
@@ -261,6 +282,52 @@ public class DaoUserImpl implements DaoUser{
 		        return student;
 	    }
 	    
+	    @Override
+	    public Professor getProfessorById(String professorID)
+	    {
+	     	Professor professor = new Professor();
+    	 	PreparedStatement preparedStatement = null;
+	        ResultSet result = null;
+	    	Connection connection = null;
+	    	String query = "SELECT id, name, lastname, birthday, contact, section, IDnumber, password FROM professors WHERE IDnumber=?;";
+	        try {
+	            connection = daoFactory.getConnection();
+	            preparedStatement = connection.prepareStatement(query);
+				preparedStatement.setNString(1, professorID);
+	            result = preparedStatement.executeQuery();
+
+	            while (result.next()) {
+	                String name = result.getString("name");
+	                String lastname = result.getString("lastname");
+	                String birthday = result.getString("birthday");
+	                String contact = result.getString("contact");
+	                String section = result.getString("section");
+	                String id = result.getString("IDnumber");
+	                String password = result.getString("password");
+	                professor.setName(name);
+	                professor.setLastname(lastname);
+	                professor.setBirthday(birthday);
+	                professor.setContact(contact);
+	                professor.setSection(section);
+	                professor.setId(id);
+	                professor.setPassword(password);
+	            }
+	        } catch (SQLException e) {
+	        } finally {
+	            try {
+	                if (result != null)
+	                    result.close();
+	                if (preparedStatement != null)
+	                	preparedStatement.close();
+	                if (connection != null)
+	                    connection.close();
+	            } catch (SQLException ignore) {
+	            }
+	        }
+	        
+	        return professor;
+	    }
+	   
 	    @Override
 	    public List<Professor> getProfessors()
 	    {

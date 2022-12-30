@@ -9,6 +9,7 @@
 <body>
 	<h1>Bienvenu dans votre espace de professeur</h1>
 	<ul>
+		<li> <a href="/ElearningManagement/myAccount?professorID=${sessionScope.login}">Mon compte</a></li>
 		<li> <a href="/ElearningManagement/attendanceTracker">Faire l'appel des étudiants</a></li>
 		<li> <a href="/ElearningManagement/setMarks">Saisir les notes des étudiants</a></li>
 		<li> <a href="/ElearningManagement/messageToStudents">Diffuser un message aux étudiants</a></li>

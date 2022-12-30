@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import com.slim.beans.Professor;
 import com.slim.beans.Student;
 import com.slim.dao.DaoFactory;
 import com.slim.dao.DaoUser;
@@ -27,15 +28,31 @@ public class MyAccount extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession( true ); 
-		String studentID = request.getParameter("studentID");
-		Student student = DaoUser.getStudentBystudentID(studentID);
-		session.setAttribute("name", student.getName());
-		session.setAttribute("lastname", student.getLastname());
-		session.setAttribute("birthday", student.getBirthday());
-		session.setAttribute("contact", student.getContact());
-		session.setAttribute("section", student.getSection());
-		session.setAttribute("id", student.getId());
-		session.setAttribute("student", student);
+		if((session.getAttribute("status")).equals("Student"))
+		{
+			String studentID = request.getParameter("studentID");
+			Student student = DaoUser.getStudentById(studentID);
+			session.setAttribute("name", student.getName());
+			session.setAttribute("lastname", student.getLastname());
+			session.setAttribute("birthday", student.getBirthday());
+			session.setAttribute("contact", student.getContact());
+			session.setAttribute("section", student.getSection());
+			session.setAttribute("id", student.getId());
+			session.setAttribute("student", student);
+		}
+		else if((session.getAttribute("status")).equals("Professor"))
+		{
+			String professorID = request.getParameter("professorID");
+			Professor professor = DaoUser.getProfessorById(professorID);
+			session.setAttribute("name", professor.getName());
+			session.setAttribute("lastname", professor.getLastname());
+			session.setAttribute("birthday", professor.getBirthday());
+			session.setAttribute("contact", professor.getContact());
+			session.setAttribute("section", professor.getSection());
+			session.setAttribute("id", professor.getId());
+			session.setAttribute("professor", professor);
+		}
+		
 		request.getRequestDispatcher("/myAccount.jsp").forward(request, response);
 	}
 
@@ -43,12 +60,26 @@ public class MyAccount extends HttpServlet {
 		String oldpassword = request.getParameter("oldpassword");
 		String newpassword = request.getParameter("newpassword");
 		HttpSession session = request.getSession( true ); 
-		Student student = (Student) session.getAttribute("student");
-		if(oldpassword.equals(student.getPassword()))
+		
+		if((session.getAttribute("status")).equals("Student"))
 		{
-			DaoUser.updateStudentPassword(newpassword, student.getId());
+			Student student = (Student) session.getAttribute("student");
+			if(oldpassword.equals(student.getPassword()))
+			{
+				DaoUser.updateStudentPassword(newpassword, student.getId());
 
+			}
 		}
+		else if((session.getAttribute("status")).equals("Professor"))
+		{
+			Professor professor = (Professor) session.getAttribute("professor");
+			if(oldpassword.equals(professor.getPassword()))
+			{
+				DaoUser.updateProfessorPassword(newpassword, professor.getId());
+
+			}
+		}
+		
 		request.getRequestDispatcher("/myAccount.jsp").forward(request, response);
 	}
 
