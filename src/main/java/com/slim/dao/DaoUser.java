@@ -11,10 +11,12 @@ public interface DaoUser {
 	void addStudent(Student student);
 	void addProfessor(Professor professor);
 	void deleteStudent(String studentID);
-	void deleteProfessor(String professorID);
 	List<Student> getStudents();
 	List<Student> getStudentsByPromoID(String promoID);
+    public Student getStudentBystudentID(String studentID);
+    void updateStudentPassword(String password, String studentID);
 	List<Professor> getProfessors();
+	void deleteProfessor(String professorID);
 	
 	void attendanceTracker(Course course);
 	void attendanceTrackerCorrected(Course course);

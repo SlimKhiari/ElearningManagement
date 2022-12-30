@@ -17,7 +17,7 @@
 	<a href="/ElearningManagement/adminMenuRedirection">Revenir au menu</a>
 
 	<c:forEach var="student" items="${students}">
-		<li><c:out value="${student.id}"/> | <c:out value="${student.name}"/> , <c:out value="${student.lastname}"/> , <c:out value="${student.section}"/> , <c:out value="${student.birthday}"/> , <c:out value="${student.contact}"/></li>
+		<li><c:out value="${student.id}"/> | <c:out value="${student.name}"/> , <c:out value="${student.lastname}"/> , <c:out value="${student.section}"/> , <c:out value="${student.birthday}"/> , <c:out value="${student.contact}"/> , <c:out value="${student.password}"/></li>
 	</c:forEach>
 </body>
 </html>

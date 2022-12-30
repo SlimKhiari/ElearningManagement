@@ -9,7 +9,7 @@
 <body>
 	<h1>Bienvenu dans votre espace d'étudiant</h1>
 	<ul>
-		<li> <a href="/ElearningManagement/attendanceTracker">Voir mon emploi du temps</a></li>
+		<li> <a href="/ElearningManagement/myAccount?studentID=${sessionScope.login}">Mon compte</a></li>
 		<li> <a href="/ElearningManagement/getMarks">Consulter mes notes</a></li>
 		<li> <a href="/ElearningManagement/getAttendanceTracker">Consulter mes abscences</a></li>
 		<li> <a href="/ElearningManagement/coursesList?studentID=${sessionScope.login}">Consulter mes cours</a></li>

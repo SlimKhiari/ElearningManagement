@@ -23,13 +23,13 @@ public class DaoUserImpl implements DaoUser{
 		@Override
 		public void deleteStudent(String studentID)
 		{
-	        Connection connexion = null;
+	        Connection connection = null;
 			PreparedStatement preparedStatement;
 	        String query = "DELETE FROM students WHERE IDnumber=?";
 	    	
 			try {
-				connexion = daoFactory.getConnection();
-				preparedStatement = connexion.prepareStatement(query);
+				connection = daoFactory.getConnection();
+				preparedStatement = connection.prepareStatement(query);
 				preparedStatement.setNString(1, studentID);
 				preparedStatement.execute();
 			} catch (SQLException e) {
@@ -40,13 +40,13 @@ public class DaoUserImpl implements DaoUser{
 		@Override
 		public void deleteProfessor(String professorID)
 		{
-			Connection connexion = null;
+			Connection connection = null;
 			PreparedStatement preparedStatement;
 	        String query = "DELETE FROM professors WHERE IDnumber=?";
 	    	
 			try {
-				connexion = daoFactory.getConnection();
-				preparedStatement = connexion.prepareStatement(query);
+				connection = daoFactory.getConnection();
+				preparedStatement = connection.prepareStatement(query);
 				preparedStatement.setNString(1, professorID);
 				preparedStatement.execute();
 			} catch (SQLException e) {
@@ -57,12 +57,12 @@ public class DaoUserImpl implements DaoUser{
 	    @Override
 	    public void addStudent(Student student)
 	    {
-	    	Connection connexion = null;
+	    	Connection connection = null;
 	    	PreparedStatement preparedStatement;
 	    	
 			try {
-	            connexion = daoFactory.getConnection();
-				preparedStatement = connexion.prepareStatement("INSERT INTO students(name,lastname,birthday,contact,section,IDnumber,password) VALUES(?,?,?,?,?,?,?);");
+	            connection = daoFactory.getConnection();
+				preparedStatement = connection.prepareStatement("INSERT INTO students(name,lastname,birthday,contact,section,IDnumber,password) VALUES(?,?,?,?,?,?,?);");
 		    	preparedStatement.setString(1, student.getName());
 		    	preparedStatement.setString(2, student.getLastname());
 		    	preparedStatement.setString(3, student.getBirthday());
@@ -79,12 +79,12 @@ public class DaoUserImpl implements DaoUser{
 	    @Override
 		public void addProfessor(Professor professor)
 		{
-	    	Connection connexion = null;
+	    	Connection connection = null;
 	    	PreparedStatement preparedStatement;
 	    	
 			try {
-	            connexion = daoFactory.getConnection();
-				preparedStatement = connexion.prepareStatement("INSERT INTO professors(name,lastname,birthday,contact,section,IDnumber,password) VALUES(?,?,?,?,?,?,?);");
+	            connection = daoFactory.getConnection();
+				preparedStatement = connection.prepareStatement("INSERT INTO professors(name,lastname,birthday,contact,section,IDnumber,password) VALUES(?,?,?,?,?,?,?);");
 		    	preparedStatement.setString(1, professor.getName());
 		    	preparedStatement.setString(2, professor.getLastname());
 		    	preparedStatement.setString(3, professor.getBirthday());
@@ -97,26 +97,48 @@ public class DaoUserImpl implements DaoUser{
 				e.printStackTrace();
 			}
 		}
-
+	    
+	    @Override
+	    public void updateStudentPassword(String password, String studentID)
+	    {
+    	 	PreparedStatement preparedStatement = null;
+	    	Connection connection = null;
+	    	String query = "UPDATE students SET password = ? WHERE IDnumber = ?";
+	        try {
+	            connection = daoFactory.getConnection();
+	            preparedStatement = connection.prepareStatement(query);
+				preparedStatement.setNString(1, password);
+				preparedStatement.setNString(2, studentID);
+				preparedStatement.executeUpdate();
+				connection.close();
+	        }
+	        catch (Exception e)
+	        {
+	          System.err.println("Got an exception! ");
+	          System.err.println(e.getMessage());
+	        }
+	    }
+	    
 	    @Override
 	    public List<Student> getStudents() {
 	        List<Student> students = new ArrayList<Student>();
 	        Statement statement = null;
-	        ResultSet resultat = null;
-	    	Connection connexion = null;
+	        ResultSet result = null;
+	    	Connection connection = null;
 
 	        try {
-	            connexion = daoFactory.getConnection();
-	            statement = connexion.createStatement();
-	            resultat = statement.executeQuery("SELECT id, name, lastname, birthday, contact, section, IDnumber FROM students;");
+	            connection = daoFactory.getConnection();
+	            statement = connection.createStatement();
+	            result = statement.executeQuery("SELECT id, name, lastname, birthday, contact, section, IDnumber, password FROM students;");
 
-	            while (resultat.next()) {
-	                String name = resultat.getString("name");
-	                String lastname = resultat.getString("lastname");
-	                String birthday = resultat.getString("birthday");
-	                String contact = resultat.getString("contact");
-	                String section = resultat.getString("section");
-	                String id = resultat.getString("IDnumber");
+	            while (result.next()) {
+	                String name = result.getString("name");
+	                String lastname = result.getString("lastname");
+	                String birthday = result.getString("birthday");
+	                String contact = result.getString("contact");
+	                String section = result.getString("section");
+	                String id = result.getString("IDnumber");
+	                String password = result.getString("password");
 	                               
 	                Student student = new Student();
 	                student.setName(name);
@@ -125,18 +147,18 @@ public class DaoUserImpl implements DaoUser{
 	                student.setContact(contact);
 	                student.setSection(section);
 	                student.setId(id);
-
+	                student.setPassword(password);
 	                students.add(student);
 	            }
 	        } catch (SQLException e) {
 	        } finally {
 	            try {
-	                if (resultat != null)
-	                    resultat.close();
+	                if (result != null)
+	                    result.close();
 	                if (statement != null)
 	                    statement.close();
-	                if (connexion != null)
-	                    connexion.close();
+	                if (connection != null)
+	                    connection.close();
 	            } catch (SQLException ignore) {
 	            }
 	        }
@@ -149,22 +171,23 @@ public class DaoUserImpl implements DaoUser{
 	    {
 	    	 	List<Student> students = new ArrayList<Student>();
 	    	 	PreparedStatement preparedStatement = null;
-		        ResultSet resultat = null;
-		    	Connection connexion = null;
-		    	String query = "SELECT id, name, lastname, birthday, contact, section, IDnumber FROM students WHERE section=?;";
+		        ResultSet result = null;
+		    	Connection connection = null;
+		    	String query = "SELECT id, name, lastname, birthday, contact, section, IDnumber, password FROM students WHERE section=?;";
 		        try {
-		            connexion = daoFactory.getConnection();
-		            preparedStatement = connexion.prepareStatement(query);
+		            connection = daoFactory.getConnection();
+		            preparedStatement = connection.prepareStatement(query);
 					preparedStatement.setNString(1, promoID);
-		            resultat = preparedStatement.executeQuery();
+		            result = preparedStatement.executeQuery();
 
-		            while (resultat.next()) {
-		                String name = resultat.getString("name");
-		                String lastname = resultat.getString("lastname");
-		                String birthday = resultat.getString("birthday");
-		                String contact = resultat.getString("contact");
-		                String section = resultat.getString("section");
-		                String id = resultat.getString("IDnumber");
+		            while (result.next()) {
+		                String name = result.getString("name");
+		                String lastname = result.getString("lastname");
+		                String birthday = result.getString("birthday");
+		                String contact = result.getString("contact");
+		                String section = result.getString("section");
+		                String id = result.getString("IDnumber");
+		                String password = result.getString("password");
 		                               
 		                Student student = new Student();
 		                student.setName(name);
@@ -173,18 +196,18 @@ public class DaoUserImpl implements DaoUser{
 		                student.setContact(contact);
 		                student.setSection(section);
 		                student.setId(id);
-
+		                student.setPassword(password);
 		                students.add(student);
 		            }
 		        } catch (SQLException e) {
 		        } finally {
 		            try {
-		                if (resultat != null)
-		                    resultat.close();
+		                if (result != null)
+		                    result.close();
 		                if (preparedStatement != null)
 		                	preparedStatement.close();
-		                if (connexion != null)
-		                    connexion.close();
+		                if (connection != null)
+		                    connection.close();
 		            } catch (SQLException ignore) {
 		            }
 		        }
@@ -193,26 +216,72 @@ public class DaoUserImpl implements DaoUser{
 	    }
 	    
 	    @Override
+	    public Student getStudentBystudentID(String studentID)
+	    {
+	    	 	Student student = new Student();
+	    	 	PreparedStatement preparedStatement = null;
+		        ResultSet result = null;
+		    	Connection connection = null;
+		    	String query = "SELECT id, name, lastname, birthday, contact, section, IDnumber, password FROM students WHERE IDnumber=?;";
+		        try {
+		            connection = daoFactory.getConnection();
+		            preparedStatement = connection.prepareStatement(query);
+					preparedStatement.setNString(1, studentID);
+		            result = preparedStatement.executeQuery();
+
+		            while (result.next()) {
+		                String name = result.getString("name");
+		                String lastname = result.getString("lastname");
+		                String birthday = result.getString("birthday");
+		                String contact = result.getString("contact");
+		                String section = result.getString("section");
+		                String id = result.getString("IDnumber");
+		                String password = result.getString("password");
+		                student.setName(name);
+		                student.setLastname(lastname);
+		                student.setBirthday(birthday);
+		                student.setContact(contact);
+		                student.setSection(section);
+		                student.setId(id);
+		                student.setPassword(password);
+		            }
+		        } catch (SQLException e) {
+		        } finally {
+		            try {
+		                if (result != null)
+		                    result.close();
+		                if (preparedStatement != null)
+		                	preparedStatement.close();
+		                if (connection != null)
+		                    connection.close();
+		            } catch (SQLException ignore) {
+		            }
+		        }
+		        
+		        return student;
+	    }
+	    
+	    @Override
 	    public List<Professor> getProfessors()
 	    {
 	    	    List<Professor> professors = new ArrayList<Professor>();
 		        Statement statement = null;
-		        ResultSet resultat = null;
-		    	Connection connexion = null;
+		        ResultSet result = null;
+		    	Connection connection = null;
 
 		        try {
-		            connexion = daoFactory.getConnection();
-		            statement = connexion.createStatement();
-		            resultat = statement.executeQuery("SELECT id, name, lastname, birthday, contact, section, IDnumber FROM professors;");
+		            connection = daoFactory.getConnection();
+		            statement = connection.createStatement();
+		            result = statement.executeQuery("SELECT id, name, lastname, birthday, contact, section, IDnumber, password FROM professors;");
 
-		            while (resultat.next()) {
-		                String name = resultat.getString("name");
-		                String lastname = resultat.getString("lastname");
-		                String birthday = resultat.getString("birthday");
-		                String contact = resultat.getString("contact");
-		                String section = resultat.getString("section");
-		                String id = resultat.getString("IDnumber");
-		                               
+		            while (result.next()) {
+		                String name = result.getString("name");
+		                String lastname = result.getString("lastname");
+		                String birthday = result.getString("birthday");
+		                String contact = result.getString("contact");
+		                String section = result.getString("section");
+		                String id = result.getString("IDnumber");
+		                String password = result.getString("password");
 		                Professor professor = new Professor();
 		                professor.setName(name);
 		                professor.setLastname(lastname);
@@ -220,18 +289,18 @@ public class DaoUserImpl implements DaoUser{
 		                professor.setContact(contact);
 		                professor.setSection(section);
 		                professor.setId(id);
-
+		                professor.setPassword(password);
 		                professors.add(professor);
 		            }
 		        } catch (SQLException e) {
 		        } finally {
 		            try {
-		                if (resultat != null)
-		                    resultat.close();
+		                if (result != null)
+		                    result.close();
 		                if (statement != null)
 		                    statement.close();
-		                if (connexion != null)
-		                    connexion.close();
+		                if (connection != null)
+		                    connection.close();
 		            } catch (SQLException ignore) {
 		            }
 		        }
@@ -242,12 +311,12 @@ public class DaoUserImpl implements DaoUser{
 	    @Override
 	    public void attendanceTracker(Course course)
 	    {
-	    	Connection connexion = null;
+	    	Connection connection = null;
 	    	PreparedStatement preparedStatement;
 	    	
 			try {
-	            connexion = daoFactory.getConnection();
-				preparedStatement = connexion.prepareStatement("INSERT INTO attendancetracker (studentID, date, subject, time) VALUES(?,?,?,?);");
+	            connection = daoFactory.getConnection();
+				preparedStatement = connection.prepareStatement("INSERT INTO attendancetracker (studentID, date, subject, time) VALUES(?,?,?,?);");
 		    	preparedStatement.setString(1, course.getStudentID());
 		    	preparedStatement.setString(2, course.getDate());
 		    	preparedStatement.setString(3, course.getSubject());
@@ -261,12 +330,12 @@ public class DaoUserImpl implements DaoUser{
 	    @Override
 		public void attendanceTrackerCorrected(Course course)
 		{
-	    	Connection connexion = null;
+	    	Connection connection = null;
 	    	PreparedStatement preparedStatement;
 	    	
 			try {
-	            connexion = daoFactory.getConnection();
-				preparedStatement = connexion.prepareStatement("DELETE FROM attendancetracker WHERE studentID=? AND time=?;");
+	            connection = daoFactory.getConnection();
+				preparedStatement = connection.prepareStatement("DELETE FROM attendancetracker WHERE studentID=? AND time=?;");
 		    	preparedStatement.setString(1, course.getStudentID());
 		    	preparedStatement.setString(2, course.getTime());		    	
 		    	preparedStatement.executeUpdate();
@@ -281,18 +350,18 @@ public class DaoUserImpl implements DaoUser{
 	    {	
 	    	boolean enter=false;
 	    	PreparedStatement preparedStatement = null;
-            ResultSet resultat = null;
-        	Connection connexion = null;
+            ResultSet result = null;
+        	Connection connection = null;
 	    	if (studentOrProfessor == 0) // "0" for professor and "1" for student
 	    	{
 		    	String query = "SELECT password FROM professors WHERE IDnumber=?;";
 		        try {
-		        	connexion = daoFactory.getConnection();
-		            preparedStatement = connexion.prepareStatement(query);
+		        	connection = daoFactory.getConnection();
+		            preparedStatement = connection.prepareStatement(query);
 					preparedStatement.setNString(1, login);
-		            resultat = preparedStatement.executeQuery();
-		            while (resultat.next()) {
-		            	String getPassword = resultat.getString("password");
+		            result = preparedStatement.executeQuery();
+		            while (result.next()) {
+		            	String getPassword = result.getString("password");
 		            	if(getPassword.equals(password))
 		            	{
 		            		enter = true;
@@ -302,12 +371,12 @@ public class DaoUserImpl implements DaoUser{
 		        } catch (SQLException e) {
 		        } finally {
 		            try {
-		                if (resultat != null)
-		                    resultat.close();
+		                if (result != null)
+		                    result.close();
 		                if (preparedStatement != null)
 		                	preparedStatement.close();
-		                if (connexion != null)
-		                    connexion.close();
+		                if (connection != null)
+		                    connection.close();
 		            } catch (SQLException ignore) {
 		            }
 		        }	
@@ -316,12 +385,12 @@ public class DaoUserImpl implements DaoUser{
 	    	{
 	    		String query = "SELECT password FROM students WHERE IDnumber=?;";
 		        try {
-		        	connexion = daoFactory.getConnection();
-		            preparedStatement = connexion.prepareStatement(query);
+		        	connection = daoFactory.getConnection();
+		            preparedStatement = connection.prepareStatement(query);
 					preparedStatement.setNString(1, login);
-		            resultat = preparedStatement.executeQuery();
-		            while (resultat.next()) {
-		            	String getPassword = resultat.getString("password");
+		            result = preparedStatement.executeQuery();
+		            while (result.next()) {
+		            	String getPassword = result.getString("password");
 		            	if(getPassword.equals(password))
 		            	{
 		            		enter = true;
@@ -331,12 +400,12 @@ public class DaoUserImpl implements DaoUser{
 		        } catch (SQLException e) {
 		        } finally {
 		            try {
-		                if (resultat != null)
-		                    resultat.close();
+		                if (result != null)
+		                    result.close();
 		                if (preparedStatement != null)
 		                	preparedStatement.close();
-		                if (connexion != null)
-		                    connexion.close();
+		                if (connection != null)
+		                    connection.close();
 		            } catch (SQLException ignore) {
 		            }
 		        }	
@@ -347,12 +416,12 @@ public class DaoUserImpl implements DaoUser{
 	    @Override
 	    public void saveMarkInDB(Exam exam)
 	    {
-	    	Connection connexion = null;
+	    	Connection connection = null;
 	    	PreparedStatement preparedStatement;
 	    	
 			try {
-	            connexion = daoFactory.getConnection();
-				preparedStatement = connexion.prepareStatement("INSERT INTO studentsmarks (studentID, mark, subject) VALUES(?,?,?);");
+	            connection = daoFactory.getConnection();
+				preparedStatement = connection.prepareStatement("INSERT INTO studentsmarks (studentID, mark, subject) VALUES(?,?,?);");
 		    	preparedStatement.setString(3, exam.getSubject());
 		    	preparedStatement.setString(1, exam.getStudentID());
 		    	preparedStatement.setString(2, exam.getMark());
@@ -365,12 +434,12 @@ public class DaoUserImpl implements DaoUser{
 	    @Override
 	    public void deleteMarkFromDB(String subject,String studentID)
 	    {
-	    	Connection connexion = null;
+	    	Connection connection = null;
 	    	PreparedStatement preparedStatement;
 	  
 			try {
-	            connexion = daoFactory.getConnection();
-				preparedStatement = connexion.prepareStatement("DELETE FROM studentsmarks WHERE studentID=? AND subject=?;");
+	            connection = daoFactory.getConnection();
+				preparedStatement = connection.prepareStatement("DELETE FROM studentsmarks WHERE studentID=? AND subject=?;");
 		    	preparedStatement.setString(1, studentID);
 		    	preparedStatement.setString(2, subject);		    	
 		    	preparedStatement.executeUpdate();
@@ -384,19 +453,19 @@ public class DaoUserImpl implements DaoUser{
 	    {
 	    	List<Exam> exams = new ArrayList<Exam>();
     	 	PreparedStatement preparedStatement = null;
-	        ResultSet resultat = null;
-	    	Connection connexion = null;
+	        ResultSet result = null;
+	    	Connection connection = null;
 	    	String query = "SELECT studentID, mark FROM studentsmarks WHERE subject=?;";
 	        try {
-	            connexion = daoFactory.getConnection();
-	            preparedStatement = connexion.prepareStatement(query);
+	            connection = daoFactory.getConnection();
+	            preparedStatement = connection.prepareStatement(query);
 				preparedStatement.setNString(1, subject);
-	            resultat = preparedStatement.executeQuery();
+	            result = preparedStatement.executeQuery();
 
-	            while (resultat.next()) {
+	            while (result.next()) {
 	            	
-	                String studentID = resultat.getString("studentID");
-	                String mark = resultat.getString("mark");
+	                String studentID = result.getString("studentID");
+	                String mark = result.getString("mark");
 	                Exam exam = new Exam();
 	                exam.setStudentID(studentID);
 	                exam.setMark(mark);
@@ -406,12 +475,12 @@ public class DaoUserImpl implements DaoUser{
 	        } catch (SQLException e) {
 	        } finally {
 	            try {
-	                if (resultat != null)
-	                    resultat.close();
+	                if (result != null)
+	                    result.close();
 	                if (preparedStatement != null)
 	                	preparedStatement.close();
-	                if (connexion != null)
-	                    connexion.close();
+	                if (connection != null)
+	                    connection.close();
 	            } catch (SQLException ignore) {
 	            }
 	        }
@@ -424,18 +493,18 @@ public class DaoUserImpl implements DaoUser{
 	    {
 	    	List<Exam> exams = new ArrayList<Exam>();
     	 	PreparedStatement preparedStatement = null;
-	        ResultSet resultat = null;
-	    	Connection connexion = null;
+	        ResultSet result = null;
+	    	Connection connection = null;
 	    	String query = "SELECT mark, subject FROM studentsmarks WHERE studentID=?;";
 	        try {
-	            connexion = daoFactory.getConnection();
-	            preparedStatement = connexion.prepareStatement(query);
+	            connection = daoFactory.getConnection();
+	            preparedStatement = connection.prepareStatement(query);
 				preparedStatement.setNString(1, studentID);
-	            resultat = preparedStatement.executeQuery();
+	            result = preparedStatement.executeQuery();
 
-	            while (resultat.next()) {
-	                String subject = resultat.getString("subject");
-	                String mark = resultat.getString("mark");
+	            while (result.next()) {
+	                String subject = result.getString("subject");
+	                String mark = result.getString("mark");
 	                Exam exam = new Exam();
 	                exam.setStudentID(studentID);
 	                exam.setMark(mark);
@@ -445,12 +514,12 @@ public class DaoUserImpl implements DaoUser{
 	        } catch (SQLException e) {
 	        } finally {
 	            try {
-	                if (resultat != null)
-	                    resultat.close();
+	                if (result != null)
+	                    result.close();
 	                if (preparedStatement != null)
 	                	preparedStatement.close();
-	                if (connexion != null)
-	                    connexion.close();
+	                if (connection != null)
+	                    connection.close();
 	            } catch (SQLException ignore) {
 	            }
 	        }
@@ -461,12 +530,12 @@ public class DaoUserImpl implements DaoUser{
 	    @Override
 	    public void saveFilesName(String fileName, String section)
 	    {
-	    	Connection connexion = null;
+	    	Connection connection = null;
 	    	PreparedStatement preparedStatement;
 	    	
 			try {
-	            connexion = daoFactory.getConnection();
-				preparedStatement = connexion.prepareStatement("INSERT INTO  uploadedfilesname (fileName, section) VALUES(?,?);");
+	            connection = daoFactory.getConnection();
+				preparedStatement = connection.prepareStatement("INSERT INTO  uploadedfilesname (fileName, section) VALUES(?,?);");
 		    	preparedStatement.setString(1, fileName);
 		    	preparedStatement.setString(2, section);
 		    	preparedStatement.executeUpdate();
@@ -480,28 +549,28 @@ public class DaoUserImpl implements DaoUser{
 	    {
 	    	List<String> filesNames = new ArrayList<String>();
     	 	PreparedStatement preparedStatement = null;
-	        ResultSet resultat = null;
-	    	Connection connexion = null;
+	        ResultSet result = null;
+	    	Connection connection = null;
 	    	String query = "SELECT fileName FROM uploadedfilesname WHERE section=?;";
 	        try {
-	            connexion = daoFactory.getConnection();
-	            preparedStatement = connexion.prepareStatement(query);
+	            connection = daoFactory.getConnection();
+	            preparedStatement = connection.prepareStatement(query);
 				preparedStatement.setNString(1, section);
-	            resultat = preparedStatement.executeQuery();
+	            result = preparedStatement.executeQuery();
 
-	            while (resultat.next()) {
-	                String fileName = resultat.getString("fileName");
+	            while (result.next()) {
+	                String fileName = result.getString("fileName");
 	                filesNames.add(fileName);
 	            }
 	        } catch (SQLException e) {
 	        } finally {
 	            try {
-	                if (resultat != null)
-	                    resultat.close();
+	                if (result != null)
+	                    result.close();
 	                if (preparedStatement != null)
 	                	preparedStatement.close();
-	                if (connexion != null)
-	                    connexion.close();
+	                if (connection != null)
+	                    connection.close();
 	            } catch (SQLException ignore) {
 	            }
 	        }
@@ -513,27 +582,27 @@ public class DaoUserImpl implements DaoUser{
 	    {
 	    	String section = null;
     	 	PreparedStatement preparedStatement = null;
-	        ResultSet resultat = null;
-	    	Connection connexion = null;
+	        ResultSet result = null;
+	    	Connection connection = null;
 	    	String query = "SELECT section FROM students WHERE IDnumber=?;";
 	        try {
-	            connexion = daoFactory.getConnection();
-	            preparedStatement = connexion.prepareStatement(query);
+	            connection = daoFactory.getConnection();
+	            preparedStatement = connection.prepareStatement(query);
 				preparedStatement.setNString(1, studentID);
-	            resultat = preparedStatement.executeQuery();
+	            result = preparedStatement.executeQuery();
 
-	            while (resultat.next()) {
-	                section = resultat.getString("section");
+	            while (result.next()) {
+	                section = result.getString("section");
 	            }
 	        } catch (SQLException e) {
 	        } finally {
 	            try {
-	                if (resultat != null)
-	                    resultat.close();
+	                if (result != null)
+	                    result.close();
 	                if (preparedStatement != null)
 	                	preparedStatement.close();
-	                if (connexion != null)
-	                    connexion.close();
+	                if (connection != null)
+	                    connection.close();
 	            } catch (SQLException ignore) {
 	            }
 	        }
@@ -546,19 +615,19 @@ public class DaoUserImpl implements DaoUser{
 	    	List<Course> courses = new ArrayList<Course>();
 	    	
     	 	PreparedStatement preparedStatement = null;
-	        ResultSet resultat = null;
-	    	Connection connexion = null;
+	        ResultSet result = null;
+	    	Connection connection = null;
 	    	String query = "SELECT date, subject, time FROM attendancetracker WHERE studentID=?;";
 	        try {
-	            connexion = daoFactory.getConnection();
-	            preparedStatement = connexion.prepareStatement(query);
+	            connection = daoFactory.getConnection();
+	            preparedStatement = connection.prepareStatement(query);
 				preparedStatement.setNString(1, studentID);
-	            resultat = preparedStatement.executeQuery();
+	            result = preparedStatement.executeQuery();
 
-	            while (resultat.next()) {
-	                String subject = resultat.getString("subject");
-	                String date = resultat.getString("date");
-	                String time = resultat.getString("time");
+	            while (result.next()) {
+	                String subject = result.getString("subject");
+	                String date = result.getString("date");
+	                String time = result.getString("time");
 	                Course course = new Course();
 	                course.setStudentID(studentID);
 	                course.setDate(date);
@@ -569,12 +638,12 @@ public class DaoUserImpl implements DaoUser{
 	        } catch (SQLException e) {
 	        } finally {
 	            try {
-	                if (resultat != null)
-	                    resultat.close();
+	                if (result != null)
+	                    result.close();
 	                if (preparedStatement != null)
 	                	preparedStatement.close();
-	                if (connexion != null)
-	                    connexion.close();
+	                if (connection != null)
+	                    connection.close();
 	            } catch (SQLException ignore) {
 	            }
 	        }

@@ -220,4 +220,14 @@
     <servlet-name>GetAttendanceTracker</servlet-name>
     <url-pattern>/getAttendanceTracker</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MyAccount</display-name>
+    <servlet-name>MyAccount</servlet-name>
+    <servlet-class>com.slim.servlets.MyAccount</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyAccount</servlet-name>
+    <url-pattern>/myAccount</url-pattern>
+  </servlet-mapping>
 </web-app>
