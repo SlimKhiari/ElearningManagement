@@ -6,15 +6,48 @@
 <meta charset="UTF-8">
 <title>ISTY - Enseignement</title>
 </head>
+<style>
+body {
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 25%;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+li a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+li a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+</style>
 <body>
-	<h1>Bienvenu dans votre espace de professeur</h1>
 	<ul>
-		<li> <a href="/ElearningManagement/myAccount?professorID=${sessionScope.login}">Mon compte</a></li>
-		<li> <a href="/ElearningManagement/attendanceTracker">Faire l'appel des étudiants</a></li>
-		<li> <a href="/ElearningManagement/setMarks">Saisir les notes des étudiants</a></li>
-		<li> <a href="/ElearningManagement/messageToStudents">Diffuser un message aux étudiants</a></li>
-		<li> <a href="/ElearningManagement/uploadServlet">Envoyer un fichier aux étudiants</a></li>
-		<li> <a href="/ElearningManagement/login">Quitter mon espace</a></li>
+		<img src="./files/isty.png" width="400" height="100">
+		<li><h2><a href="/ElearningManagement/myAccount?professorID=${sessionScope.login}">Mon compte</a></h2></li>
+		<li><h2><a href="/ElearningManagement/attendanceTracker">Faire l'appel des étudiants</a></h2></li>
+		<li><h2><a href="/ElearningManagement/setMarks">Saisir les notes des étudiants</a></h2></li>
+		<li><h2><a href="/ElearningManagement/messageToStudents">Diffuser un message aux étudiants</a></h2></li>
+		<li><h2><a href="/ElearningManagement/uploadServlet">Envoyer un fichier aux étudiants</a></h2></li>
+		<li><h2><a href="/ElearningManagement/login">Quitter mon espace</a></h2></li>
 	</ul>
 </body>
 </html>

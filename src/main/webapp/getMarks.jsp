@@ -14,10 +14,14 @@
 		}
 	%>
 	
-	<a href="/ElearningManagement/studentMenuRedirection">Revenir au menu</a>
+	<jsp:include page="menuStudent.jsp" />
 	
-	<c:forEach var="studentMark" items="${studentMarks}">
-		<li><c:out value="${studentMark.subject}"/> :  <c:out value="${studentMark.mark}"/></li>
-	</c:forEach>
+	<div style="margin-left:25%;padding:1px 16px;height:1000px;">
+		<a href="/ElearningManagement/studentMenuRedirection">Revenir au menu</a>
+		
+		<c:forEach var="studentMark" items="${studentMarks}">
+			<li><c:out value="${studentMark.subject}"/> :  <c:out value="${studentMark.mark}"/></li>
+		</c:forEach>
+	</div>
 </body>
 </html>

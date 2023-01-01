@@ -3,17 +3,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Ajouter un(e) étudiant(e)</title>
+	<meta charset="UTF-8">
+	<title>Ajouter un(e) étudiant(e)</title>
 </head>
-<body>
+<style>
+* {
+  box-sizing: border-box;
+}
 
-	<a href="/ElearningManagement//adminMenuRedirection">Revenir au menu</a>
-	
-	<c:if test="${!empty sessionScope.login}">
-	 <p>${sessionScope.login }, veuillez remplir ce formulaire afin de rajouter un(e) étudiant(e): </p>
-	</c:if>
-	
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+button[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+button[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
+<body>
 	<%
 		if(session.getAttribute("login") == null)
 		{
@@ -21,42 +79,76 @@
 		}
 	%>
 	
-	<form method="post" action="studentCreation">
-		<p>
-		<label for="name">Nom </label>
-		<input type="text" name="name" id="name" required="required"/>
-		</p>
-		<p>
-		<label for="lastnamename">Prénom </label>
-		<input type="text" name="lastname" id="lastnamename" required="required"/>
-		</p>
-		<p>
-		<label for="birthday">Date de naissance </label>
-		<input type="date" name="birthday" id="birthday" required="required"/>
-		</p>
-		<p>
-		<label for="contact">Numéro de téléphone </label>
-		<input type="text" name="contact" id="contact" required="required"/>
-		</p>
-		<p>
-		<label for="section">Filière </label>
-		<input type="text" name="section" id="section" required="required"/>
-		</p>
-		<p>
-		<label for="id">Numéro étudiant </label>
-		<input type="text" name="id" id="id" required="required"/>
-		</p>
-		<p>
-		<label for="password">Mot de passe du compte </label>
-		<input type="text" name="password" id="password" required="required"/>
-		</p>
-		<p>
-		<input type="Submit"/>
-		</p>
-	</form>
-	
-	<c:if test="${!empty name }"><p><c:out value="[${id} | ${name} ${lastname} , ${birthday} , ${contact} , ${section}] ajouté(e)."/></p></c:if>
-	
-	
+	<jsp:include page="menuAdmin.jsp" />
+	<div class="container"  style="margin-left:25%;padding:1px 16px;height:1000px;">
+	  <h1>Inscrire un(e) étudiant(e)</h1>
+	  <form method="post" action="studentCreation">
+	  <div class="row">
+	    <div class="col-25">
+	      <label for="name">Nom</label>
+	    </div>
+	    <div class="col-75">
+	     <input type="text" name="name" id="fname" required="required" placeholder="Nom..."/>
+	    </div>
+	  </div>
+	  <div class="row">
+	    <div class="col-25">
+	      <label for="lname">Prénom</label>
+	    </div>
+	    <div class="col-75">
+	      <input type="text" id="lname" name="lastname" placeholder="Prénom...">
+	    </div>
+	  </div>
+	  <div class="row">
+	    <div class="col-25">
+	      <label for="lname">Date de naissance</label>
+	    </div>
+	    <div class="col-75">
+	      <input type="date" name="birthday" id="lname" placeholder="Date de naissance...">
+	    </div>
+	  </div>
+	  <div class="row">
+	    <div class="col-25">
+	      <label for="section">Section</label>
+	    </div>
+	    <div class="col-75 form-group required">
+	      <select id="section" name="section">
+	        <option value="iatic 3">IATIC 3</option>
+	        <option value="iatic 4">IATIC 4</option>
+	        <option value="iatic 5">IATIC 5</option>
+	      </select>
+	    </div>
+	  </div>
+	  <div class="row">
+	    <div class="col-25">
+	      <label for="lname">Numéro de téléphone</label>
+	    </div>
+	    <div class="col-75">
+	      <input type="text" name="contact" id="contact" required="required" placeholder="Numéro de téléphone..."/>	      
+	    </div>
+	  </div>
+	  <div class="row">
+		    <div class="col-25">
+		      <label for="lname">Numéro d'étudiant</label>
+		    </div>
+		    <div class="col-75">
+				<input type="text" name="id" id="id" required="required" placeholder="Numéro étudiant..."/>
+		    </div>
+	   </div>
+	   <div class="row">
+		    <div class="col-25">
+		      <label for="lname">Mot de passe</label>
+		    </div>
+		    <div class="col-75">
+				<input type="text" name="password" id="password" required="required" placeholder="Mot de passe..." />
+		    </div>
+	   </div>
+	  <br>
+	  <div class="row">
+	    <button type="submit" value="Submit">  Enregistrer </button>
+	  </div>
+	  </form>
+	</div>
 </body>
 </html>
+
