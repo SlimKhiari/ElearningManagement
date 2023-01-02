@@ -5,7 +5,7 @@
 Each of these has a personal account with a different user space. *The code is in English but the front-end part is in French because this application is dedicated to a French school.*
 
 ## Version of tools used
-<br />TOMCAT (Application server that runs our JEE application): 10.0.26<br />
+TOMCAT (Application server that runs our JEE application): 10.0.26
 <br />MySQL (Database):  8.0.31<br />
 
 ## Locations of different files
