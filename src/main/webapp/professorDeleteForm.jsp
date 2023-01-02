@@ -33,9 +33,5 @@
 	  </div>
 	  </form>
 	 </div>
-	
-	<div style="margin-left:25%;padding:1px 16px;height:1000px;">
-		
-	</div>
 </body>
 </html>

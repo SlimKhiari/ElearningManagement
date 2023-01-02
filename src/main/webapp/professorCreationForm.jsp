@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Ajouter un(e) étudiant(e)</title>
-	 <link rel="stylesheet" href="styleDashboard.css">
+	<link rel="stylesheet" href="styleDashboard.css">
 </head>
 <body>
 	<%

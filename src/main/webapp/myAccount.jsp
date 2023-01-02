@@ -31,6 +31,14 @@
 	<%
 		}
 	%>
+		<%
+		if((session.getAttribute("status")).equals("Administration"))
+		{
+	%>
+	<jsp:include page="menuAdmin.jsp" />
+	<%
+		}
+	%>
 	<div>
 		<div class="container"  style="margin-left:25%;padding:1px 16px;height:1000px;">
 	  <h1>Mon compte</h1>
@@ -103,6 +111,7 @@
 	    <button type="submit" value="Submit">  Enregistrer </button>
 	  </div>
 	  </form>
+	</div>
 	</div>
 </body>
 </html>

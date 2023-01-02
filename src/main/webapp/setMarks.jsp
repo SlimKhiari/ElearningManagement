@@ -3,22 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-$(function(){
-    $("input#studentID").on({
-        keydown: function(e) {
-            if (e.which === 32)
-                return false;
-        },
-        change: function() {
-            this.value = this.value.replace(/\s/g, "");
-        }
-    });
-    })
-</script>
-<meta charset="UTF-8">
-<title>Les notes des étudiants</title>
+	<link rel="stylesheet" href="styleDashboard.css">
+	<script language="javascript" type="text/javascript">
+		function removeSpaces(string) {
+		 return string.split(' ').join('');
+		}
+	</script>
+	<meta charset="UTF-8">
+	<title>Les notes des étudiants</title>
 </head>
 <body>
 	<%
@@ -29,30 +21,44 @@ $(function(){
 	%>
 	<jsp:include page="menuProfessor.jsp" />
 	
-	<div style="margin-left:25%;padding:1px 16px;height:1000px;">
-		<a href="/ElearningManagement/professorMenuRedirection">Revenir au menu</a>
-		
+	<div class="container" style="margin-left:25%;padding:1px 16px;height:1000px;">	
+		<h1>Saisir les notes des étudiants</h1>
 		<form method="post" action="setMarks">
-			<p>
-				<label for="subject">Le nom du module </label>
-				<input type="text" name="subject" id="subject" required="required" value="${subject}"/>
-			</p>
-			<p>
-				<label for="studentID">Numéro de l'étudiant </label>
-				<input type="text" name="studentID" id="studentID"/>
-			</p>
-			<p>
-				<label for="mark">Note </label>
-				<input type="text" name="mark" id="mark"/>
-			</p>
+			<div class="row">
+			    <div class="col-25">
+					<label for="subject">Le nom du module </label>
+			    </div>
+			    <div class="col-75">
+			    		<input type="text" name="subject" id="subject" required="required" value="${subject}"/>
+			    </div>
+			 </div>
+			 <div class="row">
+			    <div class="col-25">
+					<label for="studentID">Numéro de l'étudiant</label>
+			    </div>
+			    <div class="col-75">
+					<input type="text" name="studentID" id="studentID" onblur="this.value=removeSpaces(this.value);"/>
+			    </div>
+			 </div>
+			 <div class="row">
+			    <div class="col-25">
+					<label for="mark">Note</label>
+			    </div>
+			    <div class="col-75">
+					<input type="text" name="mark" id="mark"/>
+			    </div>
+			 </div>	
+			 <div class="row">
 				<button type='submit'> Envoyer la note</button>
 				<button type='submit'> Supprimer la note</button>
 				<button type='submit'> Afficher les notes</button>			
+		     </div>
 		</form>
 		
 		<c:forEach var="studentMark" items="${studentsMarks}">
 			<li><c:out value="${studentMark.subject}"/> : <c:out value="${studentMark.studentID}"/> <c:out value="${studentMark.mark}"/></li>
 		</c:forEach>
 	</div>
+
 </body>
 </html>
