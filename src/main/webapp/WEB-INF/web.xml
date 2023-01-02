@@ -250,4 +250,14 @@
     <servlet-name>AbscenceJustification</servlet-name>
     <url-pattern>/abscenceJustification</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetJustifications</display-name>
+    <servlet-name>GetJustifications</servlet-name>
+    <servlet-class>com.slim.servlets.GetJustifications</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetJustifications</servlet-name>
+    <url-pattern>/getJustifications</url-pattern>
+  </servlet-mapping>
 </web-app>

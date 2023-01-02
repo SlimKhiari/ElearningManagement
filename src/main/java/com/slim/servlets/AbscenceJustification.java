@@ -10,6 +10,9 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.time.LocalDate; // import the LocalDate class
 
+import com.slim.dao.DaoFactory;
+import com.slim.dao.DaoUser;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +31,12 @@ public class AbscenceJustification extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	PrintWriter out = null;
 	HttpSession session = null;
+	private DaoUser DaoUser;
+    
+    public void init() throws ServletException {
+        DaoFactory daoFactory = DaoFactory.getInstance();
+        this.DaoUser = daoFactory.getDaoUser();
+    }
 
     public AbscenceJustification() {
         super();
@@ -56,7 +65,11 @@ public class AbscenceJustification extends HttpServlet {
 		    String fileName = session.getAttribute("login").toString()+"_"+date.toString()+"_"+filePart.getSubmittedFileName();
 		    InputStream is = filePart.getInputStream();
 		    Files.copy(is, Paths.get(uploadPath + File.separator + fileName), StandardCopyOption.REPLACE_EXISTING);
-			request.getRequestDispatcher("/abscenceJustification.jsp").forward(request, response);
+		    session = request.getSession( true );
+		    session.setAttribute("fileName", fileName);
+			request.setAttribute("filesName", DaoUser.getFilesName("justif"));
+		    DaoUser.saveFilesName(fileName, "justif");
+		    request.getRequestDispatcher("/abscenceJustification.jsp").forward(request, response);
 		} catch (IOException | ServletException e)
 		{
 		    out.println("Exception: " + e);

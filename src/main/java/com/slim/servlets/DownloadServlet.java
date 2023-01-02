@@ -23,7 +23,6 @@ public class DownloadServlet extends HttpServlet {
     public static String fileName = null;
     public static String section = null;
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -43,6 +42,10 @@ public class DownloadServlet extends HttpServlet {
 	    else if(section.equals("iatic 5"))
 	    {
 	    	UPLOAD_DIR="iatic_5";
+	    }
+	    else
+	    {
+	    	UPLOAD_DIR="justificatif";
 	    }
 
         if (fileName == null || fileName.equals("")) {
