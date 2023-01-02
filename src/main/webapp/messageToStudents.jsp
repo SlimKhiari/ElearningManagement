@@ -22,7 +22,7 @@
 		<form method="post" action="messageToStudents">
 			<div class="row">
 			    <div class="col-25">
-					<label for="mail">Mail</label>
+					<label for="mail">Mail de destination</label>
 			    </div>
 			    <div class="col-75">
 					<input type="text" name="mail" id="mail" required="required" placeholder="Mail de destination..."/>

@@ -6,6 +6,11 @@
 	<meta charset="UTF-8">
 	<title>Ajouter un(e) étudiant(e)</title>
 	<link rel="stylesheet" href="styleDashboard.css">
+	<script language="javascript" type="text/javascript">
+		function removeSpaces(string) {
+		 return string.split(' ').join('');
+		}
+	</script>
 </head>
 <body>
 	<%
@@ -64,7 +69,7 @@
 		      <label for="lname">Numéro de professeur</label>
 		    </div>
 		    <div class="col-75">
-				<input type="text" name="id" id="id" required="required" placeholder="Numéro de professeur..."/>
+				<input type="text" name="id" id="id" required="required" placeholder="Numéro de professeur..." onblur="this.value=removeSpaces(this.value);"/>
 		    </div>
 	   </div>
 	   <div class="row">
