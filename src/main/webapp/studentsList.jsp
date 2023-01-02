@@ -5,6 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Students registered</title>
+  <link rel="stylesheet" href="styleDashboard.css">
 </head>
 <style>
 table {
@@ -39,7 +40,25 @@ tr:nth-child(even) {
 	<jsp:include page="menuAdmin.jsp" />
 	
 	<div class="container" style="margin-left:25%;padding:1px 16px;height:1000px;">
-		<h1>Liste des étudiants inscrits</h1>
+		<h1>Liste des étudiants inscrits</h1><hr>
+		<form method="post" action="studentsList">
+			<div class="row">
+			    <div class="col-25">
+			      <label for="section">Filtrage selon la section</label>
+			    </div>
+			    <div class="col-75 form-group required">
+			      <select id="section" name="section">
+			        <option value="iatic 3">IATIC 3</option>
+			        <option value="iatic 4">IATIC 4</option>
+			        <option value="iatic 5">IATIC 5</option>
+			      	<option value="all">TOUS</option>
+			      </select>
+			    </div>
+			 </div>
+			 <div class="row">
+	    		<button type="submit" value="Submit">  Filtrer </button>
+	  		 </div>
+	   </form> <hr>
 		<div>     
 		  <table>
 		    <thead>
