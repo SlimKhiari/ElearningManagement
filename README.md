@@ -17,7 +17,7 @@ The **HTML pages** are in **webapp**.
 <br />![image](https://user-images.githubusercontent.com/73532355/210253022-d35a236e-e6f5-46c0-9f65-df4ea159cb7c.png)
 <br/>These HTM pages can be found in : **\src\main\webapp**.
 
-## How to launch the applicatio ?
+## How to launch the application ?
 To launch the application, simply launch the Login.java servlet.
 
 ## A few technical remarks
