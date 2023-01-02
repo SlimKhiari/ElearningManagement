@@ -43,5 +43,9 @@ To launch the application, simply launch the Login.java servlet.
 ## SQL queries
 All the SQL queries of our database are in the **DATABASE** folder.
 
+## Some screenshots of our application
+Authentication page
+<br />![Uploading Screenshot 2023-01-02 172320.jpg…]()
+<br />
 
 
