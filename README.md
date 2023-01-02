@@ -54,6 +54,6 @@ Student page
 > ![image](https://user-images.githubusercontent.com/73532355/210257468-40135487-ea53-4ff3-98ae-4c777c9fac83.png)
 
 Professor page
-![image](https://user-images.githubusercontent.com/73532355/210257444-2fd5909b-f065-44d2-a8c3-16c4f2541285.png)
+> ![image](https://user-images.githubusercontent.com/73532355/210257444-2fd5909b-f065-44d2-a8c3-16c4f2541285.png)
 
 
