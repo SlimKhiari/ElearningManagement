@@ -1,4 +1,4 @@
-# ElearningManagement
+# ElearningManagement - JEE
 
 ## General context
 > It is an application developed in pure JEE without framework.  It is intended for the educational world in order to manage the relations between the administration, the students and the teachers.
