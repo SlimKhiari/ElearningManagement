@@ -8,7 +8,12 @@ Each of these has a personal account with a different user space. *The code is i
 The design patterns used are: MVC and DAO for more flexibility.
 
 ## Database
-A database was used to store information regarding; students, teachers, files to send, students' grades and their course abscences. An SQL type database was used for this.
+A database was used to store information regarding; students, teachers, files to send, students grades and their course abscences. An SQL type database was used for this.
 ![This is an image](https://user-images.githubusercontent.com/73532355/210249899-638efd92-d5fe-4ff9-8258-5acac8c4732d.png)
+
+## The XSS attack
+To counter this type of classic attack on web applications, I set up a dedicated servlet to remove all the tags entered by the user. For this I used 3 important regular expressions:
+![image](https://user-images.githubusercontent.com/73532355/210250334-513eb44e-2662-4ddc-b7b1-2036a99ed03a.png)
+
 
 
