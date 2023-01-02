@@ -46,6 +46,7 @@ li a:hover:not(.active) {
 		<li><h2><a href="/ElearningManagement/getMarks">Consulter mes notes</a></h2></li>
 		<li><h2><a href="/ElearningManagement/getAttendanceTracker">Consulter mes abscences</a></h2></li>
 		<li><h2><a href="/ElearningManagement/coursesList?studentID=${sessionScope.login}">Consulter mes cours</a></h2></li>
+		<li><h2><a href="/ElearningManagement/abscenceJustification">Justifier une abscence</a></h2></li>
 		<li><h2><a href="/ElearningManagement/login">Quitter mon espace</a></h2></li>
 	</ul>
 </body>

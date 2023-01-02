@@ -230,4 +230,24 @@
     <servlet-name>MyAccount</servlet-name>
     <url-pattern>/myAccount</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AttendanceTrackerStudents</display-name>
+    <servlet-name>AttendanceTrackerStudents</servlet-name>
+    <servlet-class>com.slim.servlets.AttendanceTrackerStudents</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AttendanceTrackerStudents</servlet-name>
+    <url-pattern>/attendanceTrackerStudents</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AbscenceJustification</display-name>
+    <servlet-name>AbscenceJustification</servlet-name>
+    <servlet-class>com.slim.servlets.AbscenceJustification</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AbscenceJustification</servlet-name>
+    <url-pattern>/abscenceJustification</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -402,9 +402,11 @@ public class DaoUserImpl implements DaoUser{
 	    	
 			try {
 	            connection = daoFactory.getConnection();
-				preparedStatement = connection.prepareStatement("DELETE FROM attendancetracker WHERE studentID=? AND time=?;");
+				preparedStatement = connection.prepareStatement("DELETE FROM attendancetracker WHERE studentID=? AND time=? AND subject=? AND date=?;");
 		    	preparedStatement.setString(1, course.getStudentID());
-		    	preparedStatement.setString(2, course.getTime());		    	
+		    	preparedStatement.setString(2, course.getTime());
+		    	preparedStatement.setString(3, course.getSubject());
+		    	preparedStatement.setString(4, course.getDate());
 		    	preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -695,6 +697,47 @@ public class DaoUserImpl implements DaoUser{
 	                String subject = result.getString("subject");
 	                String date = result.getString("date");
 	                String time = result.getString("time");
+	                Course course = new Course();
+	                course.setStudentID(studentID);
+	                course.setDate(date);
+	                course.setTime(time);
+	                course.setSubject(subject);
+	                courses.add(course);
+	            }
+	        } catch (SQLException e) {
+	        } finally {
+	            try {
+	                if (result != null)
+	                    result.close();
+	                if (preparedStatement != null)
+	                	preparedStatement.close();
+	                if (connection != null)
+	                    connection.close();
+	            } catch (SQLException ignore) {
+	            }
+	        }
+	        
+	        return courses;
+	    }
+	    
+	    @Override
+	    public 	List<Course> getAttendanceFromDB()
+	    {
+	    	List<Course> courses = new ArrayList<Course>();
+	    	PreparedStatement preparedStatement = null;
+	        ResultSet result = null;
+	    	Connection connection = null;
+	    	String query = "SELECT studentID, date, subject, time FROM attendancetracker;";
+	        try {
+	            connection = daoFactory.getConnection();
+	            preparedStatement = connection.prepareStatement(query);
+	            result = preparedStatement.executeQuery();
+
+	            while (result.next()) {
+	                String subject = result.getString("subject");
+	                String date = result.getString("date");
+	                String time = result.getString("time");
+	                String studentID = result.getString("studentID");
 	                Course course = new Course();
 	                course.setStudentID(studentID);
 	                course.setDate(date);

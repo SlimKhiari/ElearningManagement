@@ -23,6 +23,7 @@ public interface DaoUser {
 	void attendanceTracker(Course course);
 	void attendanceTrackerCorrected(Course course);
 	List<Course> getAttendanceFromDBByStudentID(String studentID);
+	List<Course> getAttendanceFromDB();
 	
 	boolean isInDB(String login, String password, int studentOrProfessor);
 	

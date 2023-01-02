@@ -47,6 +47,7 @@ li a:hover:not(.active) {
  		<li><h2><a href="/ElearningManagement/professorsList">Liste des professeurs inscrits</a></h2></li>
  		<li><h2><a href="/ElearningManagement/professorCreation">Inscrire un(e) enseignant(e)</a></h2></li>
  		<li><h2><a href="/ElearningManagement/professorDelete">Supprimer un(e) enseignant(e)</a></h2></li>
+ 		<li><h2><a href="/ElearningManagement/attendanceTrackerStudents">Voir les abscences des étudiants</a></h2></li>
 		<li><h2><a href="/ElearningManagement/login">Quitter mon espace</a></li>
 	</ul>
 </body>
