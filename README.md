@@ -44,13 +44,13 @@ To launch the application, simply launch the Login.java servlet.
 All the SQL queries of our database are in the **DATABASE** folder.
 
 ## Some screenshots of our application
-> Authentication page
-<br />![Screenshot 2023-01-02 172320](https://user-images.githubusercontent.com/73532355/210257237-ecbe7f80-91b9-42ce-a6e2-92893e091bbf.jpg)
-> <br />Administration page
-![image](https://user-images.githubusercontent.com/73532355/210257346-734fde6f-566d-4f56-9c73-ecb51f5759ab.png)
-> <br />Student page
-![image](https://user-images.githubusercontent.com/73532355/210257468-40135487-ea53-4ff3-98ae-4c777c9fac83.png)
-> <br />Professor page
+Authentication page
+> <br />![Screenshot 2023-01-02 172320](https://user-images.githubusercontent.com/73532355/210257237-ecbe7f80-91b9-42ce-a6e2-92893e091bbf.jpg)
+<br />Administration page
+> ![image](https://user-images.githubusercontent.com/73532355/210257346-734fde6f-566d-4f56-9c73-ecb51f5759ab.png)
+<br />Student page
+> ![image](https://user-images.githubusercontent.com/73532355/210257468-40135487-ea53-4ff3-98ae-4c777c9fac83.png)
+<br />Professor page
 ![image](https://user-images.githubusercontent.com/73532355/210257444-2fd5909b-f065-44d2-a8c3-16c4f2541285.png)
 
 
