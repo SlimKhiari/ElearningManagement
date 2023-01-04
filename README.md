@@ -51,9 +51,9 @@ Administration page
 > ![image](https://user-images.githubusercontent.com/73532355/210257346-734fde6f-566d-4f56-9c73-ecb51f5759ab.png)
 
 Student page
-> ![image](https://user-images.githubusercontent.com/73532355/210257468-40135487-ea53-4ff3-98ae-4c777c9fac83.png)
+> ![image](https://user-images.githubusercontent.com/73532355/210508843-5e5746e5-8735-4928-a7fa-a308d9a66ea0.png)
 
 Professor page
-> ![image](https://user-images.githubusercontent.com/73532355/210257444-2fd5909b-f065-44d2-a8c3-16c4f2541285.png)
+> ![image](https://user-images.githubusercontent.com/73532355/210508929-355e45b3-1ce2-4335-9526-77384efdc3b9.png)
 
 
