@@ -8,6 +8,10 @@ Each of these has a personal account with a different user space. *The code is i
 TOMCAT (Application server that runs our JEE application): 10.0.26
 <br />MySQL (Database):  8.0.31<br />
 
+## Architecture
+MVC : 
+ ![Screenshot from 2023-08-02 14-05-58](https://github.com/SlimKhiari/ElearningManagement-JEE/assets/73532355/9331e107-8e8f-400b-9f44-637daeca7eef)
+
 ## Locations of different files
 I created **4 JAVA packages**; **one for the beans** (to instantiate the course, exam, student and teacher objects), **the second DAO** (containing the implementation of the interface in order to establish the connection with the MySQL database, and the various methods having a relation with this database), the **third security** (containing the servlet to counter the XSS attack), and the last one **servlets** (containing the servlets for redirecting and uploading and downloading files).
 <br />![image](https://user-images.githubusercontent.com/73532355/210252939-b43c835a-f200-4fde-8920-e8e384c2b870.png) <br/> 
