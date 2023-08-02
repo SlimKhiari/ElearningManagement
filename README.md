@@ -10,7 +10,7 @@ TOMCAT (Application server that runs our JEE application): 10.0.26
 
 ## Our architecture (pattern)
 MVC (model-view-controller) : <br />
- ![Screenshot from 2023-08-02 14-05-58](https://github.com/SlimKhiari/ElearningManagement-JEE/assets/73532355/9331e107-8e8f-400b-9f44-637daeca7eef | width=100)
+ ![Screenshot from 2023-08-02 14-05-58](https://github.com/SlimKhiari/ElearningManagement-JEE/assets/73532355/9331e107-8e8f-400b-9f44-637daeca7eef)
 <br />
 DAO (Data access object) : <br />
 ![Screenshot from 2023-08-02 14-08-05](https://github.com/SlimKhiari/ElearningManagement-JEE/assets/73532355/af0d3c39-5211-4cc4-af2f-20c27626eb61)
